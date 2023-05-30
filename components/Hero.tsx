@@ -30,13 +30,12 @@ export const Hero = () => {
       </div>
       <div className="w-1/3 lg:w-1/2 grid grid-cols-2 gap-3 mx-auto relative">
         <AtroposWrapper>
-          <div className="shadow">
+          <div className="shadow -translate-y-10">
             <Image
               src="/creative-resume-template.webp"
               alt="Creative Resume Template"
               width={700}
               height={350}
-              className="-translate-y-10"
               style={{
                 width: '100%',
                 height: 'auto'
@@ -46,13 +45,12 @@ export const Hero = () => {
           </div>
         </AtroposWrapper>
         <AtroposWrapper>
-          <div className="shadow">
+          <div className="shadow translate-y-10">
             <Image
               src="/minimalist-resume-template.webp"
               alt="Minimalist Resume Template"
               width={700}
               height={350}
-              className="translate-y-10"
               style={{
                 width: '100%',
                 height: 'auto'
