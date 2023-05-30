@@ -1,11 +1,23 @@
 import Link from 'next/link';
 
 import { InfoJobsLogo } from './InfoJobsLogo';
+import classNames from 'classnames';
 
-export const Footer = () => {
+export const Footer = ({ isDark = true, isFixed = true }) => {
   return (
-    <footer className="absolute mx-auto w-full bg-black text-slate-500 py-5 text-center">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center mb-10">
+    <footer
+      className={classNames(
+        'mx-auto w-full text-slate-500 py-5 text-center',
+        isDark && 'bg-black',
+        isFixed && 'absolute'
+      )}
+    >
+      <div
+        className={classNames(
+          'mx-auto max-w-7xl flex justify-between items-center mb-10',
+          isDark && 'px-4 sm:px-6 lg:px-8'
+        )}
+      >
         <div className="font-bold">Recharged CV</div>
         <div>
           <Link href="https://roberth.me" target="_blank">
@@ -13,7 +25,12 @@ export const Footer = () => {
           </Link>
         </div>
       </div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <div
+        className={classNames(
+          'mx-auto max-w-7xl flex justify-between items-center',
+          isDark && 'px-4 sm:px-6 lg:px-8'
+        )}
+      >
         <div className="flex items-end">
           Powered by{' '}
           <Link href="https://www.infojobs.net" target="_blank">

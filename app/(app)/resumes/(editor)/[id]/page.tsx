@@ -59,7 +59,7 @@ export default async function Page({ params }: any) {
   return (
     <CVEditorProvider>
       <CVEditorScoreProvider>
-        <Grid className="h-full my-6" numCols={2}>
+        <Grid className="h-full mt-6" numCols={2}>
           <CVForm defaultState={curriculum} />
           <CVEditorPreview />
         </Grid>

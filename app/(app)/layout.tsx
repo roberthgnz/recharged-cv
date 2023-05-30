@@ -13,6 +13,7 @@ import '../globals.css';
 import { Title } from '@tremor/react';
 
 import { Nav } from '@/components/Nav';
+import { Footer } from '@/components/Footer';
 import { NavTabs } from '@/components/NavTabs';
 import { NavLoading } from '@/components/NavLoading';
 
@@ -29,11 +30,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-  // if (!session) {
-  //   return redirect('/login');
-  // }
+  if (!session) {
+    return redirect('/login');
+  }
 
   return (
     <html lang="en" className="h-full bg-gray-50">
@@ -42,10 +43,11 @@ export default async function RootLayout({
           {/* @ts-expect-error Server Component */}
           <Nav />
         </Suspense>
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-8">
+        <div className="flex flex-col h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
           <Title>My resumes</Title>
           <NavTabs />
-          {children}
+          <div className="flex-1 mb-8">{children}</div>
+          <Footer isDark={false} isFixed={false} />
         </div>
         <Toaster
           position="bottom-center"

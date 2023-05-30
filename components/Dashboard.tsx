@@ -36,13 +36,13 @@ export const Dashboard = ({
       {cvs.map((cv) => (
         <CVCard key={cv.id} {...cv} />
       ))}
-      <Card className="flex items-center justify-center text-blue-500 p-0">
+      <Card className="flex items-center justify-center text-blue-500 p-0 border-2 border-dotted ring-0 shadow-none">
         <Link
           href="/resumes/create"
           className="flex items-center justify-center w-full h-full p-6"
         >
           <PlusIcon className="w-5 h-5 mr-3" />
-          Create a new resume
+          CREATE NEW RESUME
         </Link>
       </Card>
     </Grid>
