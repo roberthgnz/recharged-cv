@@ -35,7 +35,7 @@ export const CVEditorPreview = () => {
 
       if (!navigator.share) {
         navigator.clipboard.writeText(url);
-        return toast.error('Link copied to clipboard');
+        return toast.success('Link copied to clipboard');
       }
 
       const shareData = {
