@@ -120,7 +120,7 @@ export const CVEditorPreview = () => {
                                 : formatDate(experience.finishingDate)}
                             </Text>
                             <p
-                              className="text-xs space-y-1"
+                              className="[&>p]:before:content-['\2022'] [&>p]:before:mr-1 text-xs space-y-1 mt-1"
                               dangerouslySetInnerHTML={{
                                 __html: experience.description
                               }}
