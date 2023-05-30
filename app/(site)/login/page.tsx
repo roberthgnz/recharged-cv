@@ -14,11 +14,11 @@ export default async function Login() {
 
   return (
     <div className="absolute h-[250px] flex flex-col items-center max-w-[670px]">
-      <div className="max-w-xl text-gray-600 text-center">
-        <Title className="mb-4">
+      <div className="max-w-xl text-center">
+        <Title className="text-white mb-4">
           Empower Your Career with our Resume Generator!
         </Title>
-        <Text className="mb-6">
+        <Text className="text-[#f5f5f5cc] mb-6">
           Sign in below with Github to create a free account and get started.
         </Text>
         <GithubLoginButton />

@@ -13,10 +13,10 @@ const GithubIcon = () => (
 
 export const GithubLoginButton = () => {
   return (
-    <Button onClick={() => signIn('github')}>
+    <Button onClick={() => signIn('github')} size="xl" className="px-8">
       <span className="flex">
         <GithubIcon />
-        Github
+        Continue with Github
       </span>
     </Button>
   );

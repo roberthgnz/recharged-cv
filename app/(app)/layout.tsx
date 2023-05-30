@@ -29,11 +29,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
-  if (!session) {
-    return redirect('/login');
-  }
+  // if (!session) {
+  //   return redirect('/login');
+  // }
 
   return (
     <html lang="en" className="h-full bg-gray-50">

@@ -21,9 +21,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="h-full bg-gray-50">
+    <html lang="en" className="h-full bg-black text-white">
       <body className={`h-full ${inter.className}`}>
-        <div className="fixed h-screen w-full bg-gradient-to-br from-emerald-100 via-blue-50 to-rose-100"></div>
+        <div
+          className="fixed h-screen w-full bg-cover bg-no-repeat bg-gradient-to-br from-black via-blue-50 to-rose-100"
+          style={{
+            backgroundImage: 'url(/background.png)',
+            backgroundPosition: '50%'
+          }}
+        ></div>
         <Suspense fallback="...">
           {/* @ts-expect-error Server Component */}
           <Nav />
