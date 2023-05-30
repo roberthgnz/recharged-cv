@@ -33,6 +33,11 @@ export const CVEditorPreview = () => {
 
       const url = `${window.location.origin}${data.url}`;
 
+      if (!navigator.share) {
+        navigator.clipboard.writeText(url);
+        return toast.error('Link copied to clipboard');
+      }
+
       const shareData = {
         title: 'Recharged CV',
         text: 'Check out my CV created with Recharged CV',
