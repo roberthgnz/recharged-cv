@@ -68,7 +68,12 @@ export const SharedCVPreview = ({ cv }: any) => {
                           ? 'Present'
                           : formatDate(experience.finishingDate)}
                       </Text>
-                      <Text>{experience.description}</Text>
+                      <p
+                        className="[&>p]:before:content-['\2022'] [&>p]:before:mr-1 text-xs space-y-1 mt-1"
+                        dangerouslySetInnerHTML={{
+                          __html: experience.description
+                        }}
+                      ></p>
                     </div>
                   ))}
                 </div>
