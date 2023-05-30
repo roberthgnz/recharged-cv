@@ -1,7 +1,8 @@
-'use client'; // Error components must be Client Components
+'use client';
 
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { Button, Title } from '@tremor/react';
 
 export default function Error({
   error,
@@ -11,28 +12,28 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error);
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <div className="flex flex-col space-y-3">
+    <div className="my-8">
+      <Title>Something went wrong!</Title>
+      <div className="flex space-x-3">
         <Link
           href={`https://github.com/roberthgnz/recharged-cv/issues/new`}
           target="_blank"
+          className="flex-shrink-0 inline-flex justify-center items-center group focus:outline-none focus:ring-2 focus:ring-offset-2 font-medium rounded-md border shadow-sm px-2.5 py-1.5 text-xs bg-[#ef4444] border-[#ef4444]"
         >
-          Report error
+          Report as issue
         </Link>
-        <button
+        <Button
           onClick={
             // Attempt to recover by trying to re-render the segment
             () => reset()
           }
         >
           Try again
-        </button>
+        </Button>
       </div>
     </div>
   );
