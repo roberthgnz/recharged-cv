@@ -17,7 +17,7 @@ Welcome to the **Recharged CV** repository! This project is a powerful resume ge
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/)
-- [npm](https://www.npmjs.com/)
+- [pnpm](https://www.npmjs.com/)
 
 ### Installation
 
@@ -30,7 +30,7 @@ git clone https://github.com/roberthgnz/recharged-cv.git
 2. Install the required dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. Create a `.env` file in the root directory of the project and add the following environment variables:
@@ -51,5 +51,5 @@ KV_REST_API_READ_ONLY_TOKEN=
 4. Run the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
