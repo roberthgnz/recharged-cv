@@ -31,7 +31,6 @@ export default async function RootLayout({
           }}
         ></div>
         <Suspense fallback="...">
-          {/* @ts-expect-error Server Component */}
           <Nav />
         </Suspense>
         <main className="flex min-h-screen w-full flex-col items-center justify-center py-16">

@@ -40,7 +40,6 @@ export default async function RootLayout({
     <html lang="en" className="h-full bg-gray-50">
       <body className={`h-full ${inter.className}`}>
         <Suspense fallback={<NavLoading />}>
-          {/* @ts-expect-error Server Component */}
           <Nav />
         </Suspense>
         <div className="flex flex-col h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
