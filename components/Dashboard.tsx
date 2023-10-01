@@ -13,13 +13,7 @@ type CV = {
   incompleteSteps: string[];
 };
 
-export const Dashboard = ({
-  dialogUrl,
-  cvs
-}: {
-  dialogUrl: string;
-  cvs: CV[];
-}) => {
+export const Dashboard = ({ cvs }: { cvs: CV[] }) => {
   return (
     <Grid numColsMd={2} numColsLg={3} className="gap-6 mt-6">
       {cvs.map((cv) => (

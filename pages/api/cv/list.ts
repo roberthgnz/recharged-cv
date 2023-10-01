@@ -10,10 +10,7 @@ export default async function handler(
 
   if (!session) return res.status(401).json({ error: 'Unauthorized' });
 
-  let dialogUrl = '';
-
   return res.status(200).json({
-    dialogUrl,
     list: []
   });
 }
