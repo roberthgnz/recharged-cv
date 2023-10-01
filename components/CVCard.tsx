@@ -1,8 +1,6 @@
-"use client"
+'use client';
 import { useRouter } from 'next/navigation';
-import { Card, Title, Text, Legend } from '@tremor/react';
-
-import { InfoJobsLogo } from './InfoJobsLogo';
+import { Card, Title, Legend } from '@tremor/react';
 
 type CV = {
   id: number;
@@ -28,9 +26,6 @@ export const CVCard = ({ code, name, completed }: CV) => {
         <Title>{name}</Title>
         <Legend categories={[legendText]} colors={[legendColor]} />
       </div>
-      <Text className="flex items-end text-xs">
-        Imported from <InfoJobsLogo width={100} height={20} />
-      </Text>
     </Card>
   );
 };

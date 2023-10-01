@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import { InfoJobsLogo } from './InfoJobsLogo';
 import classNames from 'classnames';
 
 export const Footer = ({ isDark = true, isFixed = true }) => {
@@ -14,29 +13,10 @@ export const Footer = ({ isDark = true, isFixed = true }) => {
     >
       <div
         className={classNames(
-          'mx-auto max-w-7xl flex justify-between items-center mb-10',
-          isDark && 'px-4 sm:px-6 lg:px-8'
-        )}
-      >
-        <div className="font-bold">Recharged CV</div>
-        <div>
-          <Link href="https://roberth.me" target="_blank">
-            Roberth González
-          </Link>
-        </div>
-      </div>
-      <div
-        className={classNames(
           'mx-auto max-w-7xl flex justify-between items-center',
           isDark && 'px-4 sm:px-6 lg:px-8'
         )}
       >
-        <div className="flex items-end">
-          Powered by{' '}
-          <Link href="https://www.infojobs.net" target="_blank">
-            <InfoJobsLogo width={100} height={20} />
-          </Link>
-        </div>
         <div className="flex space-x-4">
           <Link
             href="https://twitter.com/roberthgnz"

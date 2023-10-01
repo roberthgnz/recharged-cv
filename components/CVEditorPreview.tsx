@@ -21,7 +21,7 @@ export const CVEditorPreview = () => {
   const shareLink = async () => {
     try {
       setIsSharing(true);
-      const response = await fetch('/api/cv/generate-link', {
+      const response = await fetch('/api/cv/generate-url', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { Card, Grid, Text } from '@tremor/react';
+import { Card, Grid } from '@tremor/react';
 
-import { LoginButton } from './LoginButton';
 import { CVCard } from './CVCard';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
@@ -15,24 +14,14 @@ type CV = {
 };
 
 export const Dashboard = ({
-  isLinked,
   dialogUrl,
   cvs
 }: {
-  isLinked: boolean;
   dialogUrl: string;
   cvs: CV[];
 }) => {
   return (
     <Grid numColsMd={2} numColsLg={3} className="gap-6 mt-6">
-      {!isLinked && (
-        <Card>
-          <Text className="mb-3">
-            Connect your InfoJobs account to import your resumes.
-          </Text>
-          <LoginButton url={dialogUrl} />
-        </Card>
-      )}
       {cvs.map((cv) => (
         <CVCard key={cv.id} {...cv} />
       ))}
