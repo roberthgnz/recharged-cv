@@ -6,12 +6,16 @@ import { Fragment } from 'react';
 import { usePathname } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 import classNames from 'classnames';
 
 export const Navbar = ({ user }: { user: any }) => {
   const pathname = usePathname();
+
+  const { status } = useSession();
+
+  if (status === 'loading') return <p> Loading</p>;
 
   return (
     <Disclosure

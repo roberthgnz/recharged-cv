@@ -6,6 +6,7 @@ import '../globals.css';
 
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
+import { Providers } from '@/components/Provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,21 +24,23 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-full bg-black text-white">
       <body className={`h-full ${inter.className}`}>
-        <div
-          className="fixed h-screen w-full bg-cover bg-no-repeat bg-gradient-to-br from-black via-blue-50 to-rose-100"
-          style={{
-            backgroundImage: 'url(/background.png)',
-            backgroundPosition: '50%'
-          }}
-        ></div>
-        <Suspense fallback="...">
-          <Nav />
-        </Suspense>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-16">
-          {children}
-        </main>
-        <Footer />
-        <Analytics />
+        <Providers>
+          <div
+            className="fixed h-screen w-full bg-cover bg-no-repeat bg-gradient-to-br from-black via-blue-50 to-rose-100"
+            style={{
+              backgroundImage: 'url(/background.png)',
+              backgroundPosition: '50%'
+            }}
+          ></div>
+          <Suspense fallback="...">
+            <Nav />
+          </Suspense>
+          <main className="flex min-h-screen w-full flex-col items-center justify-center py-16">
+            {children}
+          </main>
+          <Footer />
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { Title, Text } from '@tremor/react';
 
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { GithubLoginButton } from '@/components/GithubLoginButton';
+import { Session } from 'inspector';
 
 export default async function Login() {
   const session = await getServerSession(authOptions);
