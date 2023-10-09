@@ -1,10 +1,11 @@
+import { NextRequest } from "next/server"
 import { OpenAIStream, OpenAIStreamPayload } from "@/utils/OpenAIStream"
 
 export const config = {
   runtime: "edge",
 }
 
-const handler = async (req: Request): Promise<Response> => {
+export async function POST(req: NextRequest) {
   const { prompt } = (await req.json()) as {
     prompt?: string
   }
@@ -26,7 +27,6 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   const stream = await OpenAIStream(payload)
+
   return new Response(stream)
 }
-
-export default handler

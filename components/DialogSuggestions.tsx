@@ -31,7 +31,7 @@ export const DialogSuggestions = ({
       `Generate 4 Professional and energetic CV summary clearly labeling each section 1. 2. 3. 4.
       Make sure each generated summary is at least 150 and 200 max characters based on this context: ${context}`
 
-    const response = await fetch("/api/generate", {
+    const response = await fetch("/api/cv/get-suggestions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,13 +71,13 @@ export const DialogSuggestions = ({
   })
 
   return (
-    <div ref={ref} className="w-full p-3 border bg-white shadow-lg rounded-md">
+    <div ref={ref} className="w-full rounded-md border bg-white p-3 shadow-lg">
       <form onSubmit={generate}>
         <div className="flex items-center space-x-3">
           <Input
             value={context}
             onChange={(e: any) => setContext(e.target.value)}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
+            className="my-5 w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black"
             placeholder={
               'Use keywords and job title. e.g. "software engineer, python, react"'
             }
@@ -100,7 +100,7 @@ export const DialogSuggestions = ({
                     className="flex flex-row gap-4"
                     key={`generated-${index}`}
                   >
-                    <div className="w-5 h-5 flex-shrink-0 inline-flex justify-center items-center cursor-default text-blue-700 bg-blue-100 rounded-full text-sm">
+                    <div className="inline-flex h-5 w-5 shrink-0 cursor-default items-center justify-center rounded-full bg-blue-100 text-sm text-blue-700">
                       {index + 1}
                     </div>
                     <div

@@ -3,6 +3,7 @@
 import { useContext, useState } from "react"
 import Link from "next/link"
 import { CVEditorContext } from "@/cv-editor"
+import { CVEditorScoreContext } from "@/cv-editor-score"
 import languages from "@/data/language.json"
 import { formatDate } from "@/utils/date"
 import { LinkIcon } from "lucide-react"
@@ -18,11 +19,12 @@ export const CVEditorPreview = () => {
   const [isSharing, setIsSharing] = useState(false)
 
   const { state } = useContext<any>(CVEditorContext)
+  const { state: score } = useContext(CVEditorScoreContext)
 
   const shareLink = async () => {
     try {
       setIsSharing(true)
-      const response = await fetch("/api/cv/generate-url", {
+      const response = await fetch("/api/cv/get-shareable-url", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +78,7 @@ export const CVEditorPreview = () => {
     <div className="relative h-full bg-gray-600 p-8">
       <div className="h-hull sticky top-8">
         <div className="h-[210mm] select-none">
-          <Card className="h-full">
+          <Card className="h-full p-4">
             <Title className="text-lg font-bold">
               {state.personaldata.name} {state.personaldata.surname1}{" "}
               {state.personaldata.surname2}
@@ -213,7 +215,7 @@ export const CVEditorPreview = () => {
             </div>
           </Card>
           <div className="absolute bottom-2.5 right-0 space-x-3">
-            <Button onClick={shareLink} disabled={isSharing}>
+            <Button onClick={shareLink} disabled={isSharing || !(score >= 50)}>
               <LinkIcon className="mr-2 h-4 w-4" />
               Share Link
             </Button>
