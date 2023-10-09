@@ -73,16 +73,16 @@ export const CVEditorPreview = () => {
   }
 
   return (
-    <div className="h-full bg-gray-600 p-8 relative">
+    <div className="relative h-full bg-gray-600 p-8">
       <div className="h-hull sticky top-8">
         <div className="h-[210mm] select-none">
           <Card className="h-full">
-            <Title className="font-bold text-lg">
+            <Title className="text-lg font-bold">
               {state.personaldata.name} {state.personaldata.surname1}{" "}
               {state.personaldata.surname2}
             </Title>
             <h3 className="text-xs">{state.futurejob.preferredPosition}</h3>
-            <div className="grid grid-cols-3 mt-6 gap-6">
+            <div className="mt-6 grid grid-cols-3 gap-6">
               <div className="col-span-2">
                 <div className="space-y-6">
                   {state.personaldata.summary && (
@@ -119,7 +119,7 @@ export const CVEditorPreview = () => {
                                 : formatDate(experience.finishingDate)}
                             </h3>
                             <p
-                              className="[&>p]:before:content-['\2022'] [&>p]:before:mr-1 text-xs space-y-1 mt-1"
+                              className="mt-1 space-y-1 text-xs [&>p]:before:mr-1 [&>p]:before:content-['\2022']"
                               dangerouslySetInnerHTML={{
                                 __html: experience.description,
                               }}
@@ -176,7 +176,7 @@ export const CVEditorPreview = () => {
                     </li>
                   </ul>
                   <h3 className="mt-3">Date of Birth</h3>
-                  <p className="font-normal text-xs">
+                  <p className="text-xs font-normal">
                     {formatDate(state.personaldata.birthDay)}
                   </p>
                   {state.skills.expertise.length ? (
@@ -212,7 +212,7 @@ export const CVEditorPreview = () => {
               ) : null}
             </div>
           </Card>
-          <div className="space-x-3 absolute bottom-2.5 right-0">
+          <div className="absolute bottom-2.5 right-0 space-x-3">
             <Button onClick={shareLink} disabled={isSharing}>
               <LinkIcon className="mr-2 h-4 w-4" />
               Share Link
