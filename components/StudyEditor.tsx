@@ -204,7 +204,7 @@ export const StudyEditor = ({ isNew, studyId, onCancel }: any) => {
           <Switch
             id="studying"
             checked={study.stillEnrolled}
-            onChekedChange={(value: any) => {
+            onCheckedChange={(value: any) => {
               console.log(value)
               setStudy((prev: any) => ({ ...prev, stillEnrolled: value }))
             }}
