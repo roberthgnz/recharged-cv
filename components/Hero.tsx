@@ -19,7 +19,12 @@ export const Hero = () => {
 
     setLoading(true)
 
-    const { error } = await supabase.auth.signInWithOtp({ email })
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: "https://www.rcv.digital/",
+      },
+    })
 
     if (error) {
       setLoading(false)
