@@ -1,13 +1,9 @@
-'use client';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
-import { AtroposWrapper } from './AtroposWrapper';
 import { CTAButton } from './CTAButton';
+import { AtroposWrapper } from './AtroposWrapper';
 
 export const Hero = () => {
-  const router = useRouter();
-
   return (
     <div className="max-w-7xl h-full flex">
       <div className="max-w-7xl mx-auto">
@@ -22,9 +18,7 @@ export const Hero = () => {
               &quot;resume rules&quot; employers seek. Easy to use, done in
               minutes. Try now, free!
             </p>
-            <CTAButton onClick={() => router.push('/login')}>
-              Create Free Resume
-            </CTAButton>
+            <CTAButton href="/login">Create Free Resume</CTAButton>
           </div>
         </div>
       </div>
