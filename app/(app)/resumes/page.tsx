@@ -1,13 +1,12 @@
 import { redirect } from "next/navigation"
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "@/utils/auth"
 
 import { Dashboard } from "@/components/Dashboard"
 
 export default async function Resumes() {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession()
 
-  if (!session) return redirect("/login")
+  if (!session) return redirect("/")
 
   const props = {
     cvs: [],

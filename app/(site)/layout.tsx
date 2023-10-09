@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
+import { Toaster } from "react-hot-toast"
 
 import "../globals.css"
 
@@ -36,6 +37,11 @@ export default async function RootLayout({
         <main className="flex min-h-screen w-full flex-col items-center justify-center py-16">
           {children}
         </main>
+        <Toaster
+          position="bottom-center"
+          reverseOrder={false}
+          toastOptions={{ duration: 5000 }}
+        />
         <Footer />
         <Analytics />
       </body>

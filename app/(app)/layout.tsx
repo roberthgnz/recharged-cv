@@ -1,9 +1,8 @@
 import { Suspense } from "react"
 import { Inter } from "next/font/google"
 import { redirect } from "next/navigation"
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import { getServerSession } from "@/utils/auth"
 import { Analytics } from "@vercel/analytics/react"
-import { getServerSession } from "next-auth"
 import { Toaster } from "react-hot-toast"
 
 import "../globals.css"
@@ -27,10 +26,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession()
 
   if (!session) {
-    return redirect("/login")
+    return redirect("/")
   }
 
   return (

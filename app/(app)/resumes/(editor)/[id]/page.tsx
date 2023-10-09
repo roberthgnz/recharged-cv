@@ -1,13 +1,12 @@
 import { CVEditorProvider } from "@/cv-editor"
 import { CVEditorScoreProvider } from "@/cv-editor-score"
-import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import { getServerSession } from "next-auth"
+import { getServerSession } from "@/utils/auth"
 
 import { CVEditorPreview } from "@/components/CVEditorPreview"
 import { CVForm } from "@/components/CVForm"
 
 export default async function Page({ params }: any) {
-  const session = await getServerSession(authOptions)
+  const session = await getServerSession()
 
   const curriculum = {
     personaldata: {},
