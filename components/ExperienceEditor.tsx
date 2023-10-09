@@ -9,6 +9,8 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 
 import { DialogSuggestions } from "./DialogSuggestions"
+import { Label } from "./ui/label"
+import { Switch } from "./ui/switch"
 import { WYSIWYGEditor } from "./WYSIWYGEditor"
 
 const defaultGeneratedText = `1. Organized and prioritized work to complete assignments in a timely, efficient manner. 2. Worked well independently and on a team to solve problems. 3. Served as a friendly, hardworking, and punctual employee. 4. Worked as a productive and positive team member to design, code, test, report, and debug operations.`
@@ -139,21 +141,16 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
             disabled={experience.onCourse}
           />
         </div>
-        <div>
-          <span className="mt-4">Still working here?</span>
-          {/* <Toggle
-            color="zinc"
-            defaultValue="0"
-            onValueChange={(value) => {
-              setExperience((prev: any) => ({
-                ...prev,
-                onCourse: value === '1'
-              }));
+        <div className="flex items-center space-x-2">
+          <Label htmlFor="working">Still working here?</Label>
+          <Switch
+            id="working"
+            checked={experience.onCourse}
+            onCheckedChange={(value: any) => {
+              console.log(value)
+              setExperience((prev: any) => ({ ...prev, onCourse: value }))
             }}
-          >
-            <ToggleItem value="0" text="No" />
-            <ToggleItem value="1" text="Yes" />
-          </Toggle> */}
+          />
         </div>
         <div className="col-span-2">
           <div className="flex justify-between items-end my-4">
