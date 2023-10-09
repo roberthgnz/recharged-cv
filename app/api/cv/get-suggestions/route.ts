@@ -1,9 +1,7 @@
 import { NextRequest } from "next/server"
 import { OpenAIStream, OpenAIStreamPayload } from "@/utils/OpenAIStream"
 
-export const config = {
-  runtime: "edge",
-}
+export const runtime = "edge"
 
 export async function POST(req: NextRequest) {
   const { prompt } = (await req.json()) as {
