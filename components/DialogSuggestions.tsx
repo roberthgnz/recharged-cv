@@ -1,8 +1,9 @@
 'use client';
 import { useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
-import { Button, Text, TextInput } from '@tremor/react';
 import { toast } from 'react-hot-toast';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export const DialogSuggestions = ({
   prompt,
@@ -71,20 +72,16 @@ export const DialogSuggestions = ({
     <div ref={ref} className="w-full p-3 border bg-white shadow-lg rounded-md">
       <form onSubmit={generate}>
         <div className="flex items-center space-x-3">
-          <TextInput
+          <Input
             value={context}
-            onChange={(e) => setContext(e.target.value)}
+            onChange={(e: any) => setContext(e.target.value)}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
             placeholder={
               'Use keywords and job title. e.g. "software engineer, python, react"'
             }
             disabled={loading}
           />
-          <Button
-            loading={loading}
-            loadingText="Generating..."
-            onClick={generate}
-          >
+          <Button disabled={loading} onClick={generate}>
             Generate
           </Button>
         </div>
@@ -109,9 +106,9 @@ export const DialogSuggestions = ({
                         onSelect(generated.trim());
                       }}
                     >
-                      <Text className="cursor-pointer select-none rounded-md hover:bg-blue-100">
+                      <span className="cursor-pointer select-none rounded-md hover:bg-blue-100">
                         {generated}
-                      </Text>
+                      </span>
                     </div>
                   </div>
                 );

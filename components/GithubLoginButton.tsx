@@ -1,7 +1,9 @@
 'use client';
 import { signIn } from 'next-auth/react';
-import { Button } from '@tremor/react';
+import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 
 const GithubIcon = () => (
   <svg viewBox="0 0 438.549 438.549" className="mr-2 h-4 w-4">
@@ -22,9 +24,13 @@ export const GithubLoginButton = () => {
   };
 
   return (
-    <Button onClick={onSignIn} size="xl" className="px-8" loading={isLoading}>
+    <Button onClick={onSignIn} className="px-8" disabled={isLoading}>
       <span className="flex">
-        <GithubIcon />
+        {isLoading ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <GithubIcon />
+        )}
         Continue with Github
       </span>
     </Button>

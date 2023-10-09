@@ -1,7 +1,6 @@
 'use client';
 import { useContext, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import { Button, Col, Grid, Text, TextInput, Title } from '@tremor/react';
 import { PlusIcon, Sparkles } from 'lucide-react';
 
 import { CVEditorContext } from '@/cv-editor';
@@ -15,6 +14,9 @@ import { ExperienceEditor } from './ExperienceEditor';
 import { SkillCard } from './SkillCard';
 import { LanguageCard } from './LanguageCard';
 import dynamic from 'next/dynamic';
+import { Title } from '@/components/ui/title';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const WYSIWYGEditor = dynamic(
   () => import('./WYSIWYGEditor').then((mod) => mod.WYSIWYGEditor),
@@ -64,21 +66,21 @@ export const CVForm = ({ defaultState }: any) => {
   }, [defaultState]);
 
   return (
-    <Col className="h-full bg-white p-4 relative">
+    <div className="h-full bg-white p-4 relative">
       <Title className="font-extrabold">Personal Details</Title>
-      <Grid numCols={2} className="gap-2 my-4">
-        <Col>
-          <Text>Job Title</Text>
-          <TextInput
+      <div className="grid grid-cols-2 gap-2 my-4">
+        <div>
+          <h3 className="font-semibold text-emphasis">Job Title</h3>
+          <Input
             placeholder='e.g. "Software Engineer"'
             name="futurejob.preferredPosition"
             value={state.futurejob.preferredPosition}
             onChange={updateByKey}
           />
-        </Col>
-        <Col>
-          <Text>Date of Birth</Text>
-          <TextInput
+        </div>
+        <div>
+          <h3 className="font-semibold text-emphasis">Date of Birth</h3>
+          <Input
             // @ts-ignore
             type="date"
             placeholder='e.g. "Software Engineer"'
@@ -86,81 +88,79 @@ export const CVForm = ({ defaultState }: any) => {
             value={state.personaldata?.birthDay?.slice(0, 10)}
             onChange={updateByKey}
           />
-        </Col>
-      </Grid>
-      <Grid numCols={2} className="gap-2 mb-4">
-        <Col>
-          <Text>First Name</Text>
-          <TextInput
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2 mb-4">
+        <div>
+          <h3 className="font-semibold text-emphasis">First Name</h3>
+          <Input
             name="personaldata.name"
             value={state.personaldata.name}
             onChange={updateByKey}
           />
-        </Col>
-        <Col>
-          <Text>Last Name</Text>
-          <TextInput
+        </div>
+        <div>
+          <h3 className="font-semibold text-emphasis">Last Name</h3>
+          <Input
             name="personaldata.surname1"
             value={state.personaldata.surname1}
             onChange={updateByKey}
           />
-        </Col>
-      </Grid>
-      <Grid numCols={2} className="gap-2 mb-4">
-        <Col>
-          <Text>Email</Text>
-          <TextInput
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2 mb-4">
+        <div>
+          <h3 className="font-semibold text-emphasis">Email</h3>
+          <Input
             name="personaldata.email"
             value={state.personaldata.email}
             onChange={updateByKey}
           />
-        </Col>
-        <Col>
-          <Text>Phone</Text>
-          <TextInput
+        </div>
+        <div>
+          <h3 className="font-semibold text-emphasis">Phone</h3>
+          <Input
             name="personaldata.mobilePhone"
             value={state.personaldata.mobilePhone}
             onChange={updateByKey}
           />
-        </Col>
-      </Grid>
-      <Grid numCols={2} className="gap-2 mb-4">
-        <Col>
-          <Text>City</Text>
-          <TextInput
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2 mb-4">
+        <div>
+          <h3 className="font-semibold text-emphasis">City</h3>
+          <Input
             name="personaldata.cityName"
             value={state.personaldata.cityName}
             onChange={updateByKey}
           />
-        </Col>
-        <Col>
-          <Text>ZIP Code</Text>
-          <TextInput
+        </div>
+        <div>
+          <h3 className="font-semibold text-emphasis">ZIP Code</h3>
+          <Input
             name="personaldata.zipCode"
             value={state.personaldata.zipCode}
             onChange={updateByKey}
           />
-        </Col>
-      </Grid>
+        </div>
+      </div>
       <div className="flex justify-between items-end mt-8">
         <div>
           <Title className="font-extrabold">Professional Summary</Title>
-          <Text className="text-sm mb-4">
+          <h3 className="text-sm my-4">
             Write 2-4 short & energetic sentences to interest the reader!
             Mention your role, experience & most importantly - your biggest
             achievements, best qualities and skills.
-          </Text>
+          </h3>
         </div>
-        <div className="relative">
+        <div className="relative mb-4">
           <Button
-            size="xs"
-            variant="light"
-            className="ring-0 focus:ring-0"
-            icon={Sparkles}
+            color="secondary"
             onClick={() => setIsShowingSummary(true)}
             disabled={isShowingSummary}
           >
-            AI Summary Suggestions
+            <Sparkles className="mr-2 h-4 w-4" />
+            Suggestions
           </Button>
           <Transition
             show={isShowingSummary}
@@ -185,11 +185,11 @@ export const CVForm = ({ defaultState }: any) => {
         onChange={onChangeEditor}
       />
       <Title className="font-extrabold mt-8">Employment History</Title>
-      <Text className="text-sm mb-4">
+      <h3 className="text-sm my-4">
         Highlight your pertinent expertise within the past decade. Employ bullet
         points to emphasize your accomplishments, preferably supported by
         quantifiable data (Attained X, quantified by Y, through Z methodology).
-      </Text>
+      </h3>
       <div className="space-y-3">
         {!editingExperience &&
           state.experience.experience.map((item: any) => (
@@ -211,20 +211,19 @@ export const CVForm = ({ defaultState }: any) => {
         )}
       </div>
       <Button
-        size="xs"
-        variant="light"
-        className="ring-0 focus:ring-0 my-4"
-        icon={PlusIcon}
+        color="secondary"
+        className="my-4"
         onClick={() => setIsNewExperience(true)}
       >
+        <PlusIcon className="mr-2 h-4 w-4" />
         Add experience
       </Button>
       <Title className="font-extrabold mt-8">Education</Title>
-      <Text className="text-sm mb-4">
+      <h3 className="text-sm my-4">
         A diverse educational background showcased on your resume encapsulates
         the wealth of knowledge and unique perspectives you possess, enhancing
         the immense value you can contribute to any job.
-      </Text>
+      </h3>
       <div className="space-y-3">
         {!editingStudy &&
           state.education.education.map((item: any) => (
@@ -242,20 +241,19 @@ export const CVForm = ({ defaultState }: any) => {
         )}
       </div>
       <Button
-        size="xs"
-        variant="light"
-        className="ring-0 focus:ring-0 my-4"
-        icon={PlusIcon}
+        color="secondary"
+        className="my-4"
         onClick={() => setIsNewEducation(true)}
       >
+        <PlusIcon className="mr-2 h-4 w-4" />
         Add education
       </Button>
       <Title className="font-extrabold mt-8">Skills</Title>
-      <Text className="text-sm mb-4">
+      <h3 className="text-sm my-4">
         Choose 5 important skills that show you fit the position. Make sure they
         match the key skills mentioned in the job listing (especially when
         applying via an online system).
-      </Text>
+      </h3>
       <div className="space-y-3">
         {state.skills.expertise.map((item: any) => (
           <SkillCard key={item.skill} name={item.skill} level={item.level} />
@@ -269,6 +267,6 @@ export const CVForm = ({ defaultState }: any) => {
         ))}
         <LanguageCard isNew={true} />
       </div>
-    </Col>
+    </div>
   );
 };

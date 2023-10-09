@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { Card, Grid } from '@tremor/react';
 
 import { CVCard } from './CVCard';
 import { PlusIcon } from '@heroicons/react/24/outline';
+import { Card } from './ui/card';
 
 type CV = {
   id: number;
@@ -15,7 +15,7 @@ type CV = {
 
 export const Dashboard = ({ cvs }: { cvs: CV[] }) => {
   return (
-    <Grid numColsMd={2} numColsLg={3} className="gap-6 mt-6">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
       {cvs.map((cv) => (
         <CVCard key={cv.id} {...cv} />
       ))}
@@ -28,6 +28,6 @@ export const Dashboard = ({ cvs }: { cvs: CV[] }) => {
           CREATE NEW RESUME
         </Link>
       </Card>
-    </Grid>
+    </div>
   );
 };

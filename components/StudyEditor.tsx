@@ -1,23 +1,24 @@
 import { useContext, useEffect, useState } from 'react';
 import { CVEditorContext } from '@/cv-editor';
-import {
-  Grid,
-  Card,
-  Text,
-  SelectBox,
-  SelectBoxItem,
-  Toggle,
-  ToggleItem,
-  Col,
-  Button,
-  TextInput
-} from '@tremor/react';
+
 import { toast } from 'react-hot-toast';
 
 import studies from '@/data/study.json';
 import courses from '@/data/study-detail.json';
 
 import { getStudy, getStudyDetails } from '@/utils/dictionary';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
+import { SelectItem } from '@radix-ui/react-select';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
 
 export const StudyEditor = ({ isNew, studyId, onCancel }: any) => {
   const { state, setState } = useContext<any>(CVEditorContext);
@@ -130,95 +131,100 @@ export const StudyEditor = ({ isNew, studyId, onCancel }: any) => {
   };
 
   return (
-    <Card>
-      <Text>Title</Text>
-      <SelectBox
-        value={study.educationLevelCode}
-        onValueChange={(value) =>
-          onChangeEducation('educationLevelCode', value)
-        }
-      >
-        {studies.map((study: any) => (
-          <SelectBoxItem key={study.key} value={study.key} text={study.value} />
-        ))}
-      </SelectBox>
+    <Card className="p-4 border rounded-md space-y-4">
+      <div className="space-y-2">
+        <span>Title</span>
+        <Select
+          value={study.educationLevelCode}
+          onValueChange={(value) =>
+            onChangeEducation('educationLevelCode', value)
+          }
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Title" />
+          </SelectTrigger>
+          <SelectContent>
+            {studies.map((study: any) => (
+              <SelectItem key={study.key} value={study.key}>
+                {study.value}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
 
-      <Text className="mt-4">Specialization</Text>
-      <SelectBox
-        value={study.courseCode}
-        onValueChange={(value) => onChangeEducation('courseCode', value)}
-      >
-        {courses.map((course: any) => (
-          <SelectBoxItem
-            key={course.key}
-            value={course.key}
-            text={course.value}
-          />
-        ))}
-      </SelectBox>
+      <div className="space-y-2">
+        <span className="mt-4">Specialization</span>
+        <Select
+          value={study.courseCode}
+          onValueChange={(value) => onChangeEducation('courseCode', value)}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Specialization" />
+          </SelectTrigger>
+          <SelectContent>
+            {courses.map((course: any) => (
+              <SelectItem key={course.key} value={course.key}>
+                {course.value}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
 
-      <Grid numCols={2} className="gap-2">
-        <Col numColSpan={2}>
-          <Text className="mt-4">Institution</Text>
-          <TextInput
+      <div className="grid grid-cols-2 gap-2">
+        <div className="col-span-2">
+          <span className="mt-4">Institution</span>
+          <Input
             value={study.institutionName}
             name="institutionName"
             onChange={onChange}
           />
-        </Col>
-        <Col>
-          <Text className="mt-4">Start date</Text>
+        </div>
+        <div>
+          <span className="mt-4">Start date</span>
 
-          <TextInput
-            //  @ts-ignore
+          <Input
             type="date"
             name="startingDate"
             value={study.startingDate?.slice(0, 10)}
             onChange={onChange}
           />
-        </Col>
-        <Col>
-          <Text className="mt-4">End date</Text>
-          <TextInput
-            //  @ts-ignore
+        </div>
+        <div>
+          <span className="mt-4">End date</span>
+          <Input
             type="date"
             name="finishingDate"
             value={study.finishingDate?.slice(0, 10)}
             onChange={onChange}
             disabled={study.stillEnrolled}
           />
-        </Col>
-        <Col>
-          <Text className="mt-4">Still studying?</Text>
-          <Toggle
-            color="zinc"
-            defaultValue="0"
-            onValueChange={(value) => {
-              setStudy((prev: any) => ({
-                ...prev,
-                stillEnrolled: value === '1'
-              }));
+        </div>
+        <div className="flex items-center space-x-2">
+          <Label htmlFor="studying">Still studying?</Label>
+          <Switch
+            id="studying"
+            checked={study.stillEnrolled}
+            onChekedChange={(value: any) => {
+              console.log(value);
+              setStudy((prev: any) => ({ ...prev, stillEnrolled: value }));
             }}
-          >
-            <ToggleItem value="0" text="No" />
-            <ToggleItem value="1" text="Yes" />
-          </Toggle>
-        </Col>
-      </Grid>
+          />
+        </div>
+      </div>
 
       <div className="flex justify-between mt-6">
         {!isNew ? (
-          <Button size="xs" color="red" variant="secondary" onClick={onDelete}>
+          <Button variant="destructive" onClick={onDelete}>
             Delete
           </Button>
         ) : (
           <div></div>
         )}
         <div className="space-x-2">
-          <Button size="xs" onClick={onSave}>
-            Save
-          </Button>
-          <Button size="xs" variant="secondary" onClick={onCancel}>
+          <Button onClick={onSave}>Save</Button>
+          <Button variant="secondary" onClick={onCancel}>
             Cancel
           </Button>
         </div>

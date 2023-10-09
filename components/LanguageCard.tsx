@@ -2,19 +2,20 @@ import { useContext, useEffect, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
-import {
-  Button,
-  Col,
-  Grid,
-  SelectBox,
-  SelectBoxItem,
-  Text
-} from '@tremor/react';
+
 import classNames from 'classnames';
 import { CVEditorContext } from '@/cv-editor';
 import { PlusIcon } from 'lucide-react';
 
 import languages from '@/data/language.json';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
 
 export const LanguageCard = ({ isNew, id, level }: any) => {
   const { state, setState } = useContext<any>(CVEditorContext);
@@ -122,10 +123,9 @@ export const LanguageCard = ({ isNew, id, level }: any) => {
             )}
           </Disclosure.Button>
           <Disclosure.Panel as="div" className={'py-4'}>
-            <Grid numCols={2} className="gap-2">
-              <Col>
-                <Text>Language</Text>
-                <SelectBox
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <Select
                   value={language.id}
                   onValueChange={(value) => {
                     setLanguage((prev: any) => ({
@@ -134,18 +134,20 @@ export const LanguageCard = ({ isNew, id, level }: any) => {
                     }));
                   }}
                 >
-                  {languages.map((item: any) => (
-                    <SelectBoxItem
-                      key={item.id}
-                      value={item.id}
-                      text={item.value}
-                    />
-                  ))}
-                </SelectBox>
-              </Col>
-              <Col>
-                <Text>Level</Text>
-                <SelectBox
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Language" />
+                  </SelectTrigger>{' '}
+                  <SelectContent>
+                    {languages.map((item: any) => (
+                      <SelectItem key={item.id} value={item.id}>
+                        {item.value}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Select
                   value={language.level}
                   onValueChange={(value) =>
                     setLanguage((prev: any) => ({
@@ -154,33 +156,31 @@ export const LanguageCard = ({ isNew, id, level }: any) => {
                     }))
                   }
                 >
-                  <SelectBoxItem value="nulo" text="Null" />
-                  <SelectBoxItem value="elemental" text="Elementary" />
-                  <SelectBoxItem value="conversacion" text="Intermediate" />
-                  <SelectBoxItem value="negociacion" text="Advanced" />
-                  <SelectBoxItem value="nativo" text="Native" />
-                </SelectBox>
-              </Col>
-            </Grid>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Level" />
+                  </SelectTrigger>{' '}
+                  <SelectContent>
+                    <SelectItem value="nulo">Null</SelectItem>
+                    <SelectItem value="elemental">Elementary</SelectItem>
+                    <SelectItem value="conversacion">Intermediate</SelectItem>
+                    <SelectItem value="negociacion">Advanced</SelectItem>
+                    <SelectItem value="nativo">Native</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
             <div className="flex justify-between mt-6">
               {!isNew ? (
-                <Button
-                  size="xs"
-                  color="red"
-                  variant="secondary"
-                  onClick={onDelete}
-                >
+                <Button variant="destructive" onClick={onDelete}>
                   Delete
                 </Button>
               ) : (
                 <div></div>
               )}
               <div className="space-x-2">
-                <Button size="xs" onClick={onSave}>
-                  Save
-                </Button>
-                <Button size="xs" variant="secondary" onClick={onCancel}>
+                <Button onClick={onSave}>Save</Button>
+                <Button variant="secondary" onClick={onCancel}>
                   Cancel
                 </Button>
               </div>

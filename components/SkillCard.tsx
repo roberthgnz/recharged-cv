@@ -2,19 +2,20 @@ import { useContext, useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
-import {
-  Button,
-  Col,
-  Grid,
-  SelectBox,
-  SelectBoxItem,
-  Text,
-  TextInput
-} from '@tremor/react';
+
 import classNames from 'classnames';
 
 import { CVEditorContext } from '@/cv-editor';
 import { PlusIcon } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
 
 export const SkillCard = ({ isNew, name, level }: any) => {
   const { setState } = useContext<any>(CVEditorContext);
@@ -113,10 +114,10 @@ export const SkillCard = ({ isNew, name, level }: any) => {
             )}
           </Disclosure.Button>
           <Disclosure.Panel as="div" className={'py-4'}>
-            <Grid numCols={2} className="gap-2">
-              <Col>
-                <Text>Skill</Text>
-                <TextInput
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <span>Skill</span>
+                <Input
                   name="name"
                   value={skill.name}
                   onChange={(e) => {
@@ -126,10 +127,10 @@ export const SkillCard = ({ isNew, name, level }: any) => {
                     }));
                   }}
                 />
-              </Col>
-              <Col>
-                <Text>Level</Text>
-                <SelectBox
+              </div>
+              <div>
+                <span>Level</span>
+                <Select
                   value={skill.level}
                   onValueChange={(value) =>
                     setSkill((prev: any) => ({
@@ -138,31 +139,29 @@ export const SkillCard = ({ isNew, name, level }: any) => {
                     }))
                   }
                 >
-                  <SelectBoxItem value="bajo" text="Novice" />
-                  <SelectBoxItem value="medio" text="Skillful" />
-                  <SelectBoxItem value="alto" text="Expert" />
-                </SelectBox>
-              </Col>
-            </Grid>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Language" />
+                  </SelectTrigger>{' '}
+                  <SelectContent>
+                    <SelectItem value="bajo">Novice</SelectItem>
+                    <SelectItem value="medio">Skillful</SelectItem>
+                    <SelectItem value="alto">Expert</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
             <div className="flex justify-between mt-6">
               {!isNew ? (
-                <Button
-                  size="xs"
-                  color="red"
-                  variant="secondary"
-                  onClick={onDelete}
-                >
+                <Button variant="destructive" onClick={onDelete}>
                   Delete
                 </Button>
               ) : (
                 <div></div>
               )}
               <div className="space-x-2">
-                <Button size="xs" onClick={onSave}>
-                  Save
-                </Button>
-                <Button size="xs" variant="secondary" onClick={onCancel}>
+                <Button onClick={onSave}>Save</Button>
+                <Button variant="secondary" onClick={onCancel}>
                   Cancel
                 </Button>
               </div>

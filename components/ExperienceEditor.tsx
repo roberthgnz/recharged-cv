@@ -1,21 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
 import { CVEditorContext } from '@/cv-editor';
-import {
-  Grid,
-  Card,
-  Text,
-  Toggle,
-  ToggleItem,
-  Col,
-  Button,
-  TextInput
-} from '@tremor/react';
+
 import { toast } from 'react-hot-toast';
 import { Transition } from '@headlessui/react';
 import { Sparkles } from 'lucide-react';
 
 import { DialogSuggestions } from './DialogSuggestions';
 import { WYSIWYGEditor } from './WYSIWYGEditor';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const defaultGeneratedText = `1. Organized and prioritized work to complete assignments in a timely, efficient manner. 2. Worked well independently and on a team to solve problems. 3. Served as a friendly, hardworking, and punctual employee. 4. Worked as a productive and positive team member to design, code, test, report, and debug operations.`;
 
@@ -117,26 +111,26 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
   };
 
   return (
-    <Card>
-      <Grid numCols={2} className="gap-2">
-        <Col numColSpan={2}>
-          <Text className="mt-4">Job title</Text>
-          <TextInput value={experience.job} name="job" onChange={onChange} />
-        </Col>
-        <Col>
-          <Text className="mt-4">Start date</Text>
+    <Card className="p-4 border rounded-md">
+      <div className="grid grid-cols-2 gap-2">
+        <div className="col-span-2">
+          <span className="mt-4">Job title</span>
+          <Input value={experience.job} name="job" onChange={onChange} />
+        </div>
+        <div>
+          <span className="mt-4">Start date</span>
 
-          <TextInput
+          <Input
             //  @ts-ignore
             type="date"
             name="startingDate"
             value={experience.startingDate?.slice(0, 10)}
             onChange={onChange}
           />
-        </Col>
-        <Col>
-          <Text className="mt-4">End date</Text>
-          <TextInput
+        </div>
+        <div>
+          <span className="mt-4">End date</span>
+          <Input
             //  @ts-ignore
             type="date"
             name="finishingDate"
@@ -144,10 +138,10 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
             onChange={onChange}
             disabled={experience.onCourse}
           />
-        </Col>
-        <Col>
-          <Text className="mt-4">Still working here?</Text>
-          <Toggle
+        </div>
+        <div>
+          <span className="mt-4">Still working here?</span>
+          {/* <Toggle
             color="zinc"
             defaultValue="0"
             onValueChange={(value) => {
@@ -159,25 +153,24 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
           >
             <ToggleItem value="0" text="No" />
             <ToggleItem value="1" text="Yes" />
-          </Toggle>
-        </Col>
-        <Col numColSpan={2}>
-          <div className="flex justify-between items-end mt-8">
+          </Toggle> */}
+        </div>
+        <div className="col-span-2">
+          <div className="flex justify-between items-end my-4">
             <div>
-              <Text className="mb-4">
+              <span className="mb-4">
                 Description <span className="text-gray-400">(optional)</span>
-              </Text>
+              </span>
             </div>
             <div className="relative">
               <Button
-                size="xs"
-                variant="light"
+                color="secondary"
                 className="ring-0 focus:ring-0"
-                icon={Sparkles}
                 onClick={() => setIsShowingSuggestions(true)}
                 disabled={isShowingSuggestions || !experience.job}
               >
-                AI Description Suggestions
+                <Sparkles className="mr-2 h-4 w-4" />
+                Suggestions
               </Button>
               <Transition
                 show={isShowingSuggestions}
@@ -211,17 +204,12 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
             value={experience.description}
             onChange={onChangeEditor}
           />
-        </Col>
-      </Grid>
+        </div>
+      </div>
       <div className="flex justify-between mt-6">
         {!isNew ? (
           <div>
-            <Button
-              size="xs"
-              color="red"
-              variant="secondary"
-              onClick={onDelete}
-            >
+            <Button variant="destructive" onClick={onDelete}>
               Delete
             </Button>
           </div>
@@ -229,10 +217,8 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
           <div></div>
         )}
         <div className="space-x-2">
-          <Button size="xs" onClick={onSave}>
-            Save
-          </Button>
-          <Button size="xs" variant="secondary" onClick={onCancel}>
+          <Button onClick={onSave}>Save</Button>
+          <Button variant="secondary" onClick={onCancel}>
             Cancel
           </Button>
         </div>

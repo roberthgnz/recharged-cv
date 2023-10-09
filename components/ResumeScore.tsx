@@ -1,9 +1,9 @@
 'use client';
 import { useCallback, useContext, useEffect, useRef } from 'react';
 import { CVEditorScoreContext } from '@/cv-editor-score';
-import { Badge, Text } from '@tremor/react';
 
 import ReactCanvasConfetti from 'react-canvas-confetti';
+import { Badge } from '@/components/ui/badge';
 
 const colors: any = {
   0: 'bg-red-500',
@@ -51,8 +51,14 @@ export const ResumeScore = () => {
   return (
     <div>
       <div className="flex items-center space-x-3">
-        <Badge color={color.split('-')[1] as any}>{score}%</Badge>{' '}
-        <Text className="text-white">Resume score</Text>
+        <Badge
+          style={{
+            color: color.split('-')[1] as any
+          }}
+        >
+          {score}%
+        </Badge>{' '}
+        <span className="text-white">Resume score</span>
       </div>
       <div className="h-0.5 bg-gray-200">
         <div

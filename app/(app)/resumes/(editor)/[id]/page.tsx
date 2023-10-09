@@ -1,8 +1,6 @@
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
 
-import { Grid } from '@tremor/react';
-
 import { CVEditorProvider } from '@/cv-editor';
 import { CVEditorScoreProvider } from '@/cv-editor-score';
 
@@ -30,10 +28,10 @@ export default async function Page({ params }: any) {
   return (
     <CVEditorProvider>
       <CVEditorScoreProvider>
-        <Grid className="h-full mt-6" numCols={2}>
+        <div className="grid grid-cols-2 h-full mt-6">
           <CVForm defaultState={curriculum} />
           <CVEditorPreview />
-        </Grid>
+        </div>
       </CVEditorScoreProvider>
     </CVEditorProvider>
   );

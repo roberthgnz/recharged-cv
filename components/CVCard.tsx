@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { Card, Title, Legend } from '@tremor/react';
+import { Title } from '@/components/ui/title';
+import { Card } from '@/components/ui/card';
 
 type CV = {
   id: number;
@@ -24,7 +25,7 @@ export const CVCard = ({ code, name, completed }: CV) => {
     >
       <div className="flex mb-6 items-center justify-between">
         <Title>{name}</Title>
-        <Legend categories={[legendText]} colors={[legendColor]} />
+        {/* <Legend categories={[legendText]} colors={[legendColor]} /> */}
       </div>
     </Card>
   );

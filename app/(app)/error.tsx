@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { Button, Title } from '@tremor/react';
+import { Title } from '@/components/ui/title';
+import { Button } from '@/components/ui/button';
 
 export default function Error({
   error,

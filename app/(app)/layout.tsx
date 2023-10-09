@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast';
 
 import '../globals.css';
 
-import { Title } from '@tremor/react';
+import { Title } from '@/components/ui/title';
 
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';

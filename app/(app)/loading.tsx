@@ -1,11 +1,11 @@
-import { Grid, Card } from '@tremor/react';
+import { Card } from '@/components/ui/card';
 
 export default function Loading() {
   return (
-    <Grid numColsMd={2} numColsLg={3} className="gap-6 mt-6 animation-pulse">
+    <div className="md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 animation-pulse">
       {Array.from({ length: 3 }).map((_, index) => (
         <Card key={index} className="h-[120px]" />
       ))}
-    </Grid>
+    </div>
   );
 }

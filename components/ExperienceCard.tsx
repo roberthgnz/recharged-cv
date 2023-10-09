@@ -1,7 +1,7 @@
-import { Text, Subtitle, Button } from '@tremor/react';
 import { Edit } from 'lucide-react';
 
 import { formatDate } from '@/utils/date';
+import { Button } from '@/components/ui/button';
 
 export const ExperienceCard = ({
   id,
@@ -15,21 +15,17 @@ export const ExperienceCard = ({
   return (
     <div className="p-4 border rounded-md">
       <div className="flex items-center justify-between">
-        <Subtitle className="my-1 font-bold">{job}</Subtitle>{' '}
-        <Button
-          size="xs"
-          variant="light"
-          icon={Edit}
-          onClick={() => onEdit(id)}
-        >
+        <h2 className="my-1 font-bold">{job}</h2>{' '}
+        <Button variant="secondary" onClick={() => onEdit(id)}>
+          <Edit className="mr-2 h-4 w-4" />
           Edit
         </Button>
       </div>
-      {company && <Text className="text-xs">{company}</Text>}
-      <Text className="text-xs">
+      {company && <span className="text-xs">{company}</span>}
+      <span className="text-xs">
         {formatDate(startingDate)} -{' '}
         {onCourse ? 'Present' : formatDate(finishingDate)}
-      </Text>
+      </span>
     </div>
   );
 };

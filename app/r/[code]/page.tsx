@@ -2,9 +2,8 @@ import { kv } from '@vercel/kv';
 
 import Link from 'next/link';
 
-import { Title } from '@tremor/react';
-
 import { SharedCVPreview } from '@/components/SharedCVPreview';
+import { Title } from '@/components/ui/title';
 
 export default async function Live({ params }: any) {
   const code = params.code;
