@@ -47,7 +47,7 @@ export default async function RootLayout({
         <Toaster
           position="bottom-center"
           reverseOrder={false}
-          toastOptions={{ duration: 2000 }}
+          toastOptions={{ duration: 5000 }}
         />
         <Analytics />
       </body>
