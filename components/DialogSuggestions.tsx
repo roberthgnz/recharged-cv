@@ -42,6 +42,7 @@ export const DialogSuggestions = ({
     })
 
     if (!response.ok) {
+      setLoading(false)
       return toast.error(response.statusText)
     }
 

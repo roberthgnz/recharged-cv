@@ -1,15 +1,46 @@
-import { NextRequest } from "next/server"
+import { headers } from "next/headers"
 import { OpenAIStream, OpenAIStreamPayload } from "@/utils/OpenAIStream"
+import Redis from "@/utils/redis"
+import { Ratelimit } from "@upstash/ratelimit"
 
-export const runtime = "edge"
+// Create a new ratelimiter, that allows 5 requests per 24 hours
+const ratelimit = Redis
+  ? new Ratelimit({
+      redis: Redis,
+      limiter: Ratelimit.fixedWindow(5, "1440 m"),
+      analytics: true,
+    })
+  : undefined
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const { prompt } = (await req.json()) as {
     prompt?: string
   }
 
   if (!prompt) {
     return new Response("No prompt in the request", { status: 400 })
+  }
+
+  // Rate Limiter Code
+  if (ratelimit) {
+    const headersList = headers()
+
+    const ipIdentifier = headersList.get("x-real-ip")
+
+    const result = await ratelimit.limit(ipIdentifier ?? "")
+
+    if (!result.success) {
+      return new Response(
+        "Too many uploads in 1 day. Please try again in a 24 hours.",
+        {
+          status: 429,
+          headers: {
+            "X-RateLimit-Limit": result.limit,
+            "X-RateLimit-Remaining": result.remaining,
+          } as any,
+        }
+      )
+    }
   }
 
   const payload: OpenAIStreamPayload = {
