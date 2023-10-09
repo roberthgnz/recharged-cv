@@ -1,24 +1,24 @@
-import { CVEditorProvider } from '@/cv-editor';
-import { CVEditorScoreProvider } from '@/cv-editor-score';
+import { CVEditorProvider } from "@/cv-editor"
+import { CVEditorScoreProvider } from "@/cv-editor-score"
 
-import { CVForm } from '@/components/CVForm';
-import { CVEditorPreview } from '@/components/CVEditorPreview';
+import { CVEditorPreview } from "@/components/CVEditorPreview"
+import { CVForm } from "@/components/CVForm"
 
 export default async function Page() {
   const defaultState = {
     personaldata: {},
     futurejob: {},
     experience: {
-      experience: []
+      experience: [],
     },
     education: {
-      education: []
+      education: [],
     },
     skills: {
       expertise: [],
-      language: []
-    }
-  };
+      language: [],
+    },
+  }
 
   return (
     <CVEditorProvider>
@@ -29,5 +29,5 @@ export default async function Page() {
         </div>
       </CVEditorScoreProvider>
     </CVEditorProvider>
-  );
+  )
 }

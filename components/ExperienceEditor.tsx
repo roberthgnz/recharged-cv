@@ -1,34 +1,34 @@
-import { useContext, useEffect, useState } from 'react';
-import { CVEditorContext } from '@/cv-editor';
+import { useContext, useEffect, useState } from "react"
+import { CVEditorContext } from "@/cv-editor"
+import { Transition } from "@headlessui/react"
+import { Sparkles } from "lucide-react"
+import { toast } from "react-hot-toast"
 
-import { toast } from 'react-hot-toast';
-import { Transition } from '@headlessui/react';
-import { Sparkles } from 'lucide-react';
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 
-import { DialogSuggestions } from './DialogSuggestions';
-import { WYSIWYGEditor } from './WYSIWYGEditor';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { DialogSuggestions } from "./DialogSuggestions"
+import { WYSIWYGEditor } from "./WYSIWYGEditor"
 
-const defaultGeneratedText = `1. Organized and prioritized work to complete assignments in a timely, efficient manner. 2. Worked well independently and on a team to solve problems. 3. Served as a friendly, hardworking, and punctual employee. 4. Worked as a productive and positive team member to design, code, test, report, and debug operations.`;
+const defaultGeneratedText = `1. Organized and prioritized work to complete assignments in a timely, efficient manner. 2. Worked well independently and on a team to solve problems. 3. Served as a friendly, hardworking, and punctual employee. 4. Worked as a productive and positive team member to design, code, test, report, and debug operations.`
 
 export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
-  const { state, setState } = useContext<any>(CVEditorContext);
+  const { state, setState } = useContext<any>(CVEditorContext)
 
   const [experience, setExperience] = useState<any>({
     id: Date.now(),
-    job: '',
-    startingDate: '',
-    finishingDate: '',
-    onCourse: false
-  });
+    job: "",
+    startingDate: "",
+    finishingDate: "",
+    onCourse: false,
+  })
 
   const [prompt, setPrompt] = useState<string>(
-    'Generate 8 Professional and energetic CV phrases for Employment History section clearly labeling each section 1. 2. 3. 4. Make sure each generated phrase is at least 50 and 100 max characters'
-  );
+    "Generate 8 Professional and energetic CV phrases for Employment History section clearly labeling each section 1. 2. 3. 4. Make sure each generated phrase is at least 50 and 100 max characters"
+  )
 
-  const [isShowingSuggestions, setIsShowingSuggestions] = useState(false);
+  const [isShowingSuggestions, setIsShowingSuggestions] = useState(false)
 
   useEffect(() => {
     if (!isNew) {
@@ -36,42 +36,42 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
         state.experience.experience.find(
           (experience: any) => experience.id === experienceId
         )
-      );
+      )
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
     setPrompt(
       `Generate 8 Professional and energetic CV phrases for Employment History section clearly labeling each section 1. 2. 3. 4. Make sure each generated phrase is at least 50 and 100 max characters based on this context: Job Title: ${experience.job}, Worked well independently and on a team to solve problems. Served as a friendly, hardworking, and punctual employee. Organized and prioritized work to complete assignments in a timely, efficient manner.`
-    );
-  }, [experience.job]);
+    )
+  }, [experience.job])
 
   const onChange = (event: any) => {
-    const { name, value } = event.target;
-    setExperience((prev: any) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = event.target
+    setExperience((prev: any) => ({ ...prev, [name]: value }))
+  }
 
   const onChangeEditor = (description: string) => {
-    setExperience((prev: any) => ({ ...prev, description }));
-  };
+    setExperience((prev: any) => ({ ...prev, description }))
+  }
 
   const validate = () => {
     if (!experience.job) {
-      return false;
+      return false
     }
     if (!experience.startingDate) {
-      return false;
+      return false
     }
     if (!experience.finishingDate && !experience.onCourse) {
-      return false;
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   const onSave = () => {
     if (!validate()) {
-      return toast.error('Please fill all the required fields');
+      return toast.error("Please fill all the required fields")
     }
 
     if (!isNew) {
@@ -81,34 +81,34 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
           ...prev.experience,
           experience: prev.experience.experience.map((_experience: any) =>
             _experience.id === experienceId ? experience : _experience
-          )
-        }
-      }));
+          ),
+        },
+      }))
     } else {
       setState((prev: any) => ({
         ...prev,
         experience: {
           ...prev.experience,
-          experience: [...prev.experience.experience, experience]
-        }
-      }));
+          experience: [...prev.experience.experience, experience],
+        },
+      }))
     }
-    onCancel();
-  };
+    onCancel()
+  }
 
   const onDelete = () => {
-    if (!confirm('Are you sure you want to delete this experience?')) return;
+    if (!confirm("Are you sure you want to delete this experience?")) return
     setState((prev: any) => ({
       ...prev,
       experience: {
         ...prev.experience,
         experience: prev.experience.experience.filter(
           (_experience: any) => _experience.id !== experienceId
-        )
-      }
-    }));
-    onCancel();
-  };
+        ),
+      },
+    }))
+    onCancel()
+  }
 
   return (
     <Card className="p-4 border rounded-md">
@@ -190,9 +190,9 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
                       setExperience((prev: any) => ({
                         ...prev,
                         description: `${
-                          prev.description ? prev.description + '\n' : ''
-                        }${suggestions}`
-                      }));
+                          prev.description ? prev.description + "\n" : ""
+                        }${suggestions}`,
+                      }))
                     }}
                     onClose={() => setIsShowingSuggestions(false)}
                   />
@@ -224,5 +224,5 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
         </div>
       </div>
     </Card>
-  );
-};
+  )
+}

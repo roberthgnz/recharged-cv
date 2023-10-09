@@ -1,17 +1,17 @@
-import Link from 'next/link';
+import Link from "next/link"
+import { PlusIcon } from "@heroicons/react/24/outline"
 
-import { CVCard } from './CVCard';
-import { PlusIcon } from '@heroicons/react/24/outline';
-import { Card } from './ui/card';
+import { CVCard } from "./CVCard"
+import { Card } from "./ui/card"
 
 type CV = {
-  id: number;
-  code: string;
-  name: string;
-  completed: boolean;
-  principal: boolean;
-  incompleteSteps: string[];
-};
+  id: number
+  code: string
+  name: string
+  completed: boolean
+  principal: boolean
+  incompleteSteps: string[]
+}
 
 export const Dashboard = ({ cvs }: { cvs: CV[] }) => {
   return (
@@ -29,5 +29,5 @@ export const Dashboard = ({ cvs }: { cvs: CV[] }) => {
         </Link>
       </Card>
     </div>
-  );
-};
+  )
+}

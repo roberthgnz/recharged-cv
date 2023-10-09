@@ -1,29 +1,28 @@
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { getServerSession } from 'next-auth';
+import { CVEditorProvider } from "@/cv-editor"
+import { CVEditorScoreProvider } from "@/cv-editor-score"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth"
 
-import { CVEditorProvider } from '@/cv-editor';
-import { CVEditorScoreProvider } from '@/cv-editor-score';
-
-import { CVForm } from '@/components/CVForm';
-import { CVEditorPreview } from '@/components/CVEditorPreview';
+import { CVEditorPreview } from "@/components/CVEditorPreview"
+import { CVForm } from "@/components/CVForm"
 
 export default async function Page({ params }: any) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions)
 
   const curriculum = {
     personaldata: {},
     futurejob: {},
     experience: {
-      experience: []
+      experience: [],
     },
     education: {
-      education: []
+      education: [],
     },
     skills: {
       expertise: [],
-      language: []
-    }
-  };
+      language: [],
+    },
+  }
 
   return (
     <CVEditorProvider>
@@ -34,5 +33,5 @@ export default async function Page({ params }: any) {
         </div>
       </CVEditorScoreProvider>
     </CVEditorProvider>
-  );
+  )
 }

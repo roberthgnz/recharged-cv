@@ -1,77 +1,76 @@
-'use client';
-import Link from 'next/link';
-import { useContext, useState } from 'react';
-import { toast } from 'react-hot-toast';
+"use client"
 
-import { LinkIcon } from 'lucide-react';
+import { useContext, useState } from "react"
+import Link from "next/link"
+import { CVEditorContext } from "@/cv-editor"
+import languages from "@/data/language.json"
+import { formatDate } from "@/utils/date"
+import { LinkIcon } from "lucide-react"
+import { toast } from "react-hot-toast"
 
-import { formatDate } from '@/utils/date';
-import { CVEditorContext } from '@/cv-editor';
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Title } from "@/components/ui/title"
 
-import languages from '@/data/language.json';
-
-import { ResumeScore } from './ResumeScore';
-import { Card } from '@/components/ui/card';
-import { Title } from '@/components/ui/title';
-import { Button } from '@/components/ui/button';
+import { ResumeScore } from "./ResumeScore"
 
 export const CVEditorPreview = () => {
-  const [isSharing, setIsSharing] = useState(false);
+  const [isSharing, setIsSharing] = useState(false)
 
-  const { state } = useContext<any>(CVEditorContext);
+  const { state } = useContext<any>(CVEditorContext)
 
   const shareLink = async () => {
     try {
-      setIsSharing(true);
-      const response = await fetch('/api/cv/generate-url', {
-        method: 'POST',
+      setIsSharing(true)
+      const response = await fetch("/api/cv/generate-url", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cv: state })
-      });
+        body: JSON.stringify({ cv: state }),
+      })
 
-      const data = await response.json();
+      const data = await response.json()
 
-      const url = `${window.location.origin}${data.url}`;
+      const url = `${window.location.origin}${data.url}`
 
       if (!navigator.share) {
-        navigator.clipboard.writeText(url);
-        return toast.success('Link copied to clipboard');
+        navigator.clipboard.writeText(url)
+        return toast.success("Link copied to clipboard")
       }
 
       const shareData = {
-        title: 'Recharged CV',
-        text: 'Check out my CV created with Recharged CV',
-        url
-      };
+        title: "Recharged CV",
+        text: "Check out my CV created with Recharged CV",
+        url,
+      }
 
-      await navigator.share(shareData);
+      await navigator.share(shareData)
     } catch (error) {
-      console.error(error);
-      toast.error('Error generating link');
+      console.error(error)
+      toast.error("Error generating link")
     } finally {
-      setIsSharing(false);
+      setIsSharing(false)
     }
-  };
+  }
 
   const getSkillLabel = (level: string) => {
-    return { bajo: 'Novice', medio: 'Skillful', alto: 'Expert' }[level];
-  };
+    return { bajo: "Novice", medio: "Skillful", alto: "Expert" }[level]
+  }
 
   const getLanguageName = (id: number) => {
-    return languages.find((item: any) => item.id === id)?.value;
-  };
+    return languages.find((item: any) => item.id === id)?.value
+  }
 
   const getLanguageSkillLabel = (level: string) => {
     return {
-      nulo: 'None',
-      elemental: 'Elementary',
-      conversacion: 'Intermediate',
-      negociacion: 'Advanced',
-      nativo: 'Native'
-    }[level];
-  };
+      nulo: "None",
+      elemental: "Elementary",
+      conversacion: "Intermediate",
+      negociacion: "Advanced",
+      nativo: "Native",
+    }[level]
+  }
 
   return (
     <div className="h-full bg-gray-600 p-8 relative">
@@ -79,7 +78,7 @@ export const CVEditorPreview = () => {
         <div className="h-[210mm] select-none">
           <Card className="h-full">
             <Title className="font-bold text-lg">
-              {state.personaldata.name} {state.personaldata.surname1}{' '}
+              {state.personaldata.name} {state.personaldata.surname1}{" "}
               {state.personaldata.surname2}
             </Title>
             <h3 className="text-xs">{state.futurejob.preferredPosition}</h3>
@@ -92,7 +91,7 @@ export const CVEditorPreview = () => {
                       <p
                         className="text-xs"
                         dangerouslySetInnerHTML={{
-                          __html: state.personaldata.summary
+                          __html: state.personaldata.summary,
                         }}
                       ></p>
                     </div>
@@ -114,15 +113,15 @@ export const CVEditorPreview = () => {
                               </h3>
                             )}
                             <h3 className="text-xs">
-                              {formatDate(experience.startingDate)} -{' '}
+                              {formatDate(experience.startingDate)} -{" "}
                               {experience.onCourse
-                                ? 'Present'
+                                ? "Present"
                                 : formatDate(experience.finishingDate)}
                             </h3>
                             <p
                               className="[&>p]:before:content-['\2022'] [&>p]:before:mr-1 text-xs space-y-1 mt-1"
                               dangerouslySetInnerHTML={{
-                                __html: experience.description
+                                __html: experience.description,
                               }}
                             ></p>
                           </div>
@@ -145,9 +144,9 @@ export const CVEditorPreview = () => {
                               </h3>
                             )}
                             <h3 className="text-xs">
-                              {formatDate(study.startingDate)} -{' '}
+                              {formatDate(study.startingDate)} -{" "}
                               {study.stillEnrolled
-                                ? 'Present'
+                                ? "Present"
                                 : formatDate(study.finishingDate)}
                             </h3>
                           </div>
@@ -162,7 +161,7 @@ export const CVEditorPreview = () => {
                   <h3 className="mb-1 font-bold text-gray-700">Details</h3>
                   <ul className="text-xs">
                     <li>
-                      {state.personaldata.cityName},{' '}
+                      {state.personaldata.cityName},{" "}
                       {state.personaldata.zipCode}
                     </li>
                     <li>
@@ -201,7 +200,7 @@ export const CVEditorPreview = () => {
                         {state.skills.language.map((item: any) => (
                           <div key={item.id}>
                             <p className="text-xs">
-                              {getLanguageName(item.id)} -{' '}
+                              {getLanguageName(item.id)} -{" "}
                               {getLanguageSkillLabel(item.speaking)}
                             </p>
                           </div>
@@ -225,5 +224,5 @@ export const CVEditorPreview = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,15 +1,15 @@
-import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
+import { redirect } from "next/navigation"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import { getServerSession } from "next-auth"
 
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { GithubLoginButton } from '@/components/GithubLoginButton';
-import { Title } from '@/components/ui/title';
+import { Title } from "@/components/ui/title"
+import { GithubLoginButton } from "@/components/GithubLoginButton"
 
 export default async function Login() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions)
 
   if (session) {
-    redirect('/');
+    redirect("/")
   }
 
   return (
@@ -24,5 +24,5 @@ export default async function Login() {
         <GithubLoginButton />
       </div>
     </div>
-  );
+  )
 }

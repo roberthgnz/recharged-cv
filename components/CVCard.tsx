@@ -1,22 +1,24 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import { Title } from '@/components/ui/title';
-import { Card } from '@/components/ui/card';
+"use client"
+
+import { useRouter } from "next/navigation"
+
+import { Card } from "@/components/ui/card"
+import { Title } from "@/components/ui/title"
 
 type CV = {
-  id: number;
-  code: string;
-  name: string;
-  completed: boolean;
-  principal: boolean;
-  incompleteSteps: string[];
-};
+  id: number
+  code: string
+  name: string
+  completed: boolean
+  principal: boolean
+  incompleteSteps: string[]
+}
 
 export const CVCard = ({ code, name, completed }: CV) => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const legendText = completed ? 'Completed' : 'Incomplete';
-  const legendColor = completed ? 'green' : 'red';
+  const legendText = completed ? "Completed" : "Incomplete"
+  const legendColor = completed ? "green" : "red"
 
   return (
     <Card
@@ -28,5 +30,5 @@ export const CVCard = ({ code, name, completed }: CV) => {
         {/* <Legend categories={[legendText]} colors={[legendColor]} /> */}
       </div>
     </Card>
-  );
-};
+  )
+}

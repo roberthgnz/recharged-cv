@@ -1,36 +1,36 @@
-'use client';
-import Link from 'next/link';
+"use client"
 
-import { formatDate } from '@/utils/date';
+import Link from "next/link"
+import languages from "@/data/language.json"
+import { formatDate } from "@/utils/date"
 
-import languages from '@/data/language.json';
-import { Card, CardContent } from '@/components/ui/card';
-import { Title } from '@/components/ui/title';
+import { Card, CardContent } from "@/components/ui/card"
+import { Title } from "@/components/ui/title"
 
 export const SharedCVPreview = ({ cv }: any) => {
   const getSkillLabel = (level: string) => {
-    return { bajo: 'Novice', medio: 'Skillful', alto: 'Expert' }[level];
-  };
+    return { bajo: "Novice", medio: "Skillful", alto: "Expert" }[level]
+  }
 
   const getLanguageName = (id: number) => {
-    return languages.find((item: any) => item.id === id)?.value;
-  };
+    return languages.find((item: any) => item.id === id)?.value
+  }
 
   const getLanguageSkillLabel = (level: string) => {
     return {
-      nulo: 'None',
-      elemental: 'Elementary',
-      conversacion: 'Intermediate',
-      negociacion: 'Advanced',
-      nativo: 'Native'
-    }[level];
-  };
+      nulo: "None",
+      elemental: "Elementary",
+      conversacion: "Intermediate",
+      negociacion: "Advanced",
+      nativo: "Native",
+    }[level]
+  }
 
   return (
     <Card className="w-[210mm] h-[297mm] mx-auto mb-8">
       <CardContent className="w-full h-full p-6">
         <Title className="font-bold text-lg">
-          {cv.personaldata.name} {cv.personaldata.surname1}{' '}
+          {cv.personaldata.name} {cv.personaldata.surname1}{" "}
           {cv.personaldata.surname2}
         </Title>
         <span className="text-xs">{cv.futurejob.preferredPosition}</span>
@@ -43,7 +43,7 @@ export const SharedCVPreview = ({ cv }: any) => {
                   <p
                     className="text-xs"
                     dangerouslySetInnerHTML={{
-                      __html: cv.personaldata.summary
+                      __html: cv.personaldata.summary,
                     }}
                   ></p>
                 </div>
@@ -65,15 +65,15 @@ export const SharedCVPreview = ({ cv }: any) => {
                           </span>
                         )}
                         <span className="text-xs">
-                          {formatDate(experience.startingDate)} -{' '}
+                          {formatDate(experience.startingDate)} -{" "}
                           {experience.onCourse
-                            ? 'Present'
+                            ? "Present"
                             : formatDate(experience.finishingDate)}
                         </span>
                         <p
                           className="[&>p]:before:content-['\2022'] [&>p]:before:mr-1 text-xs space-y-1 mt-1"
                           dangerouslySetInnerHTML={{
-                            __html: experience.description
+                            __html: experience.description,
                           }}
                         ></p>
                       </div>
@@ -96,9 +96,9 @@ export const SharedCVPreview = ({ cv }: any) => {
                           </span>
                         )}
                         <span className="text-xs">
-                          {formatDate(study.startingDate)} -{' '}
+                          {formatDate(study.startingDate)} -{" "}
                           {study.stillEnrolled
-                            ? 'Present'
+                            ? "Present"
                             : formatDate(study.finishingDate)}
                         </span>
                       </div>
@@ -151,7 +151,7 @@ export const SharedCVPreview = ({ cv }: any) => {
                     {cv.skills.language.map((item: any) => (
                       <div key={item.id}>
                         <p className="text-xs">
-                          {getLanguageName(item.id)} -{' '}
+                          {getLanguageName(item.id)} -{" "}
                           {getLanguageSkillLabel(item.speaking)}
                         </p>
                       </div>
@@ -164,5 +164,5 @@ export const SharedCVPreview = ({ cv }: any) => {
         </div>
       </CardContent>
     </Card>
-  );
-};
+  )
+}

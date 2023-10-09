@@ -1,50 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client';
-import { useLocalStorage } from 'usehooks-ts';
-import { createContext, useEffect, useState } from 'react';
+"use client"
+
+import { createContext, useEffect, useState } from "react"
+import { useLocalStorage } from "usehooks-ts"
 
 const defaultState = {
   personaldata: {},
   futurejob: {},
   experience: {
-    experience: []
+    experience: [],
   },
   education: {
-    education: []
+    education: [],
   },
   skills: {
     expertise: [],
-    language: []
-  }
-};
+    language: [],
+  },
+}
 
-type CVEditorContextState = Record<string, unknown> | null;
+type CVEditorContextState = Record<string, unknown> | null
 
-export const CVEditorContext =
-  createContext<CVEditorContextState>(defaultState);
+export const CVEditorContext = createContext<CVEditorContextState>(defaultState)
 
 export const CVEditorProvider = ({
-  children
+  children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) => {
   const [localEditorData, setlocalEditorData] =
-    useLocalStorage<CVEditorContextState>('recharged-cv', null);
-  const [state, setState] = useState<CVEditorContextState>(defaultState);
+    useLocalStorage<CVEditorContextState>("recharged-cv", null)
+  const [state, setState] = useState<CVEditorContextState>(defaultState)
 
   useEffect(() => {
     if (localEditorData) {
-      setState(localEditorData);
+      setState(localEditorData)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    setlocalEditorData(state);
-  }, [state]);
+    setlocalEditorData(state)
+  }, [state])
 
   return (
     <CVEditorContext.Provider value={{ state, setState }}>
       {children}
     </CVEditorContext.Provider>
-  );
-};
+  )
+}

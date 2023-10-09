@@ -1,69 +1,69 @@
-'use client';
-import { useContext, useEffect, useState } from 'react';
-import { Transition } from '@headlessui/react';
-import { PlusIcon, Sparkles } from 'lucide-react';
+"use client"
 
-import { CVEditorContext } from '@/cv-editor';
+import { useContext, useEffect, useState } from "react"
+import dynamic from "next/dynamic"
+import { CVEditorContext } from "@/cv-editor"
+import { Transition } from "@headlessui/react"
+import { PlusIcon, Sparkles } from "lucide-react"
 
-import { DialogSuggestions } from './DialogSuggestions';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Title } from "@/components/ui/title"
 
-import { StudyCard } from './StudyCard';
-import { StudyEditor } from './StudyEditor';
-import { ExperienceCard } from './ExperienceCard';
-import { ExperienceEditor } from './ExperienceEditor';
-import { SkillCard } from './SkillCard';
-import { LanguageCard } from './LanguageCard';
-import dynamic from 'next/dynamic';
-import { Title } from '@/components/ui/title';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { DialogSuggestions } from "./DialogSuggestions"
+import { ExperienceCard } from "./ExperienceCard"
+import { ExperienceEditor } from "./ExperienceEditor"
+import { LanguageCard } from "./LanguageCard"
+import { SkillCard } from "./SkillCard"
+import { StudyCard } from "./StudyCard"
+import { StudyEditor } from "./StudyEditor"
 
 const WYSIWYGEditor = dynamic(
-  () => import('./WYSIWYGEditor').then((mod) => mod.WYSIWYGEditor),
+  () => import("./WYSIWYGEditor").then((mod) => mod.WYSIWYGEditor),
   {
     ssr: false,
     loading: () => (
       <div className="w-full h-[300px] border-2 border-[#eee] rounded-[10px] bg-gray-300 animate-pulse"></div>
-    )
+    ),
   }
-);
+)
 
 export const CVForm = ({ defaultState }: any) => {
-  const { state, setState } = useContext<any>(CVEditorContext);
+  const { state, setState } = useContext<any>(CVEditorContext)
 
-  const [isShowingSummary, setIsShowingSummary] = useState(false);
+  const [isShowingSummary, setIsShowingSummary] = useState(false)
 
-  const [editingStudy, setEditingStudy] = useState<boolean>(false);
-  const [isNewEducation, setIsNewEducation] = useState<boolean>(false);
+  const [editingStudy, setEditingStudy] = useState<boolean>(false)
+  const [isNewEducation, setIsNewEducation] = useState<boolean>(false)
 
-  const [editingExperience, setEditingExperience] = useState<boolean>(false);
-  const [isNewExperience, setIsNewExperience] = useState<boolean>(false);
+  const [editingExperience, setEditingExperience] = useState<boolean>(false)
+  const [isNewExperience, setIsNewExperience] = useState<boolean>(false)
 
   const updateByKey = (e: any) => {
-    const [key, name] = e.target.name.split('.');
+    const [key, name] = e.target.name.split(".")
     setState((prev: any) => ({
       ...prev,
       [key]: {
         ...prev[key],
-        [name]: e.target.value
-      }
-    }));
-  };
+        [name]: e.target.value,
+      },
+    }))
+  }
 
   const onChangeEditor = (summary: any) => {
     setState((prev: any) => ({
       ...prev,
       personaldata: {
         ...prev.personaldata,
-        summary
-      }
-    }));
-  };
+        summary,
+      },
+    }))
+  }
 
   useEffect(() => {
-    setState(defaultState);
+    setState(defaultState)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [defaultState]);
+  }, [defaultState])
 
   return (
     <div className="h-full bg-white p-4 relative">
@@ -204,8 +204,8 @@ export const CVForm = ({ defaultState }: any) => {
             isNew={isNewExperience}
             experienceId={editingExperience}
             onCancel={() => {
-              setEditingExperience(false);
-              setIsNewExperience(false);
+              setEditingExperience(false)
+              setIsNewExperience(false)
             }}
           />
         )}
@@ -234,8 +234,8 @@ export const CVForm = ({ defaultState }: any) => {
             isNew={isNewEducation}
             studyId={editingStudy}
             onCancel={() => {
-              setEditingStudy(false);
-              setIsNewEducation(false);
+              setEditingStudy(false)
+              setIsNewEducation(false)
             }}
           />
         )}
@@ -268,5 +268,5 @@ export const CVForm = ({ defaultState }: any) => {
         <LanguageCard isNew={true} />
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,20 +1,19 @@
-import Link from 'next/link';
-
-import classNames from 'classnames';
+import Link from "next/link"
+import classNames from "classnames"
 
 export const Footer = ({ isDark = true, isFixed = true }) => {
   return (
     <footer
       className={classNames(
-        'mx-auto w-full text-slate-500 py-5 text-center',
-        isDark && 'bg-black',
-        isFixed && 'absolute'
+        "mx-auto w-full text-slate-500 py-5 text-center",
+        isDark && "bg-black",
+        isFixed && "absolute"
       )}
     >
       <div
         className={classNames(
-          'mx-auto max-w-7xl flex justify-between items-center',
-          isDark && 'px-4 sm:px-6 lg:px-8'
+          "mx-auto max-w-7xl flex justify-between items-center",
+          isDark && "px-4 sm:px-6 lg:px-8"
         )}
       >
         <div className="flex space-x-4">
@@ -45,5 +44,5 @@ export const Footer = ({ isDark = true, isFixed = true }) => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}

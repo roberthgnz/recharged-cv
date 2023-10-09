@@ -1,20 +1,21 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import { useEffect } from 'react';
-import { Title } from '@/components/ui/title';
-import { Button } from '@/components/ui/button';
+import { useEffect } from "react"
+import Link from "next/link"
+
+import { Button } from "@/components/ui/button"
+import { Title } from "@/components/ui/title"
 
 export default function Error({
   error,
-  reset
+  reset,
 }: {
-  error: Error;
-  reset: () => void;
+  error: Error
+  reset: () => void
 }) {
   useEffect(() => {
-    console.error(error);
-  }, [error]);
+    console.error(error)
+  }, [error])
 
   return (
     <div className="my-8">
@@ -37,5 +38,5 @@ export default function Error({
         </Button>
       </div>
     </div>
-  );
+  )
 }

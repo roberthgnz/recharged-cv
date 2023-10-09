@@ -1,5 +1,5 @@
-import { Card } from '@/components/ui/card';
-import { Title } from '@/components/ui/title';
+import { Card } from "@/components/ui/card"
+import { Title } from "@/components/ui/title"
 
 export default function Loading() {
   return (
@@ -28,5 +28,5 @@ export default function Loading() {
         </div>
       </div>
     </div>
-  );
+  )
 }

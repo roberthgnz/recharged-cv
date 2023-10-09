@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/card';
+import { Card } from "@/components/ui/card"
 
 export default function Loading() {
   return (
@@ -7,5 +7,5 @@ export default function Loading() {
         <Card key={index} className="h-[120px]" />
       ))}
     </div>
-  );
+  )
 }
