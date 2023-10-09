@@ -1,21 +1,22 @@
-'use client';
-import { useEffect, useRef } from 'react';
-import Atropos, { AtroposInstance } from 'atropos';
+"use client"
 
-let el: AtroposInstance;
+import { useEffect, useRef } from "react"
+import Atropos, { AtroposInstance } from "atropos"
+
+let el: AtroposInstance
 
 export const AtroposWrapper = ({ children }: any) => {
-  const elRef = useRef<any>();
+  const elRef = useRef<any>()
 
   useEffect(() => {
     el = Atropos({
       el: elRef.current,
       activeOffset: 1000,
-      shadowScale: 5
-    });
+      shadowScale: 5,
+    })
 
-    return () => el?.destroy?.();
-  }, []);
+    return () => el?.destroy?.()
+  }, [])
 
   return (
     <div ref={elRef} className="atropos">
@@ -25,5 +26,5 @@ export const AtroposWrapper = ({ children }: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,45 +1,45 @@
-import { useContext, useState } from 'react';
-import { Disclosure } from '@headlessui/react';
-import { ChevronUpIcon } from '@heroicons/react/24/outline';
-import { toast } from 'react-hot-toast';
-import {
-  Button,
-  Col,
-  Grid,
-  SelectBox,
-  SelectBoxItem,
-  Text,
-  TextInput
-} from '@tremor/react';
-import classNames from 'classnames';
+import { useContext, useState } from "react"
+import { CVEditorContext } from "@/cv-editor"
+import { Disclosure } from "@headlessui/react"
+import { ChevronUpIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
+import { PlusIcon } from "lucide-react"
+import { toast } from "react-hot-toast"
 
-import { CVEditorContext } from '@/cv-editor';
-import { PlusIcon } from 'lucide-react';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 export const SkillCard = ({ isNew, name, level }: any) => {
-  const { setState } = useContext<any>(CVEditorContext);
+  const { setState } = useContext<any>(CVEditorContext)
 
   const [skill, setSkill] = useState<any>(() => ({
-    name: name || '',
-    level: level || ''
-  }));
+    name: name || "",
+    level: level || "",
+  }))
 
   const onDelete = () => {
-    if (!confirm('Are you sure you want to delete this skill?')) return;
+    if (!confirm("Are you sure you want to delete this skill?")) return
     setState((prev: any) => ({
       ...prev,
       skills: {
         ...prev.expertise,
         expertise: prev.skills.expertise.filter(
           (item: any) => item.skill !== name
-        )
-      }
-    }));
-  };
+        ),
+      },
+    }))
+  }
 
   const onSave = () => {
     if (!skill.name || !skill.level)
-      return toast.error('Please fill all the fields');
+      return toast.error("Please fill all the fields")
 
     if (isNew) {
       setState((prev: any) => ({
@@ -50,11 +50,11 @@ export const SkillCard = ({ isNew, name, level }: any) => {
             ...prev.skills.expertise,
             {
               skill: skill.name,
-              level: skill.level
-            }
-          ]
-        }
-      }));
+              level: skill.level,
+            },
+          ],
+        },
+      }))
     } else {
       setState((prev: any) => ({
         ...prev,
@@ -64,42 +64,42 @@ export const SkillCard = ({ isNew, name, level }: any) => {
             return item.skill === name
               ? {
                   skill: skill.name,
-                  level: skill.level
+                  level: skill.level,
                 }
-              : item;
-          })
-        }
-      }));
+              : item
+          }),
+        },
+      }))
     }
     setSkill(() => ({
-      name: 'Not specified',
-      level: ''
-    }));
-  };
+      name: "Not specified",
+      level: "",
+    }))
+  }
 
   const onCancel = () => {
     if (isNew) {
       setSkill(() => ({
-        name: '',
-        level: ''
-      }));
+        name: "",
+        level: "",
+      }))
     } else {
       setSkill(() => ({
         name,
-        level
-      }));
+        level,
+      }))
     }
-  };
+  }
 
   return (
-    <Disclosure as={'div'} className={'p-4 border rounded-md'}>
+    <Disclosure as={"div"} className={"p-4 border rounded-md"}>
       {({ open }) => (
         <>
           <Disclosure.Button
-            className={'w-full flex items-center justify-between'}
+            className={"w-full flex items-center justify-between"}
           >
-            <span className={classNames(isNew && 'text-blue-500')}>
-              {isNew ? 'Add skill' : name}
+            <span className={classNames(isNew && "text-blue-500")}>
+              {isNew ? "Add skill" : name}
             </span>
 
             {isNew && !open ? (
@@ -108,61 +108,59 @@ export const SkillCard = ({ isNew, name, level }: any) => {
               <ChevronUpIcon
                 width={16}
                 height={16}
-                className={open ? 'rotate-180 transform' : ''}
+                className={open ? "rotate-180 transform" : ""}
               />
             )}
           </Disclosure.Button>
-          <Disclosure.Panel as="div" className={'py-4'}>
-            <Grid numCols={2} className="gap-2">
-              <Col>
-                <Text>Skill</Text>
-                <TextInput
+          <Disclosure.Panel as="div" className={"py-4"}>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <span>Skill</span>
+                <Input
                   name="name"
                   value={skill.name}
                   onChange={(e) => {
                     setSkill((prev: any) => ({
                       ...prev,
-                      name: e.target.value
-                    }));
+                      name: e.target.value,
+                    }))
                   }}
                 />
-              </Col>
-              <Col>
-                <Text>Level</Text>
-                <SelectBox
+              </div>
+              <div>
+                <span>Level</span>
+                <Select
                   value={skill.level}
                   onValueChange={(value) =>
                     setSkill((prev: any) => ({
                       ...prev,
-                      level: value
+                      level: value,
                     }))
                   }
                 >
-                  <SelectBoxItem value="bajo" text="Novice" />
-                  <SelectBoxItem value="medio" text="Skillful" />
-                  <SelectBoxItem value="alto" text="Expert" />
-                </SelectBox>
-              </Col>
-            </Grid>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Language" />
+                  </SelectTrigger>{" "}
+                  <SelectContent>
+                    <SelectItem value="bajo">Novice</SelectItem>
+                    <SelectItem value="medio">Skillful</SelectItem>
+                    <SelectItem value="alto">Expert</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
             <div className="flex justify-between mt-6">
               {!isNew ? (
-                <Button
-                  size="xs"
-                  color="red"
-                  variant="secondary"
-                  onClick={onDelete}
-                >
+                <Button variant="destructive" onClick={onDelete}>
                   Delete
                 </Button>
               ) : (
                 <div></div>
               )}
               <div className="space-x-2">
-                <Button size="xs" onClick={onSave}>
-                  Save
-                </Button>
-                <Button size="xs" variant="secondary" onClick={onCancel}>
+                <Button onClick={onSave}>Save</Button>
+                <Button variant="secondary" onClick={onCancel}>
                   Cancel
                 </Button>
               </div>
@@ -171,5 +169,5 @@ export const SkillCard = ({ isNew, name, level }: any) => {
         </>
       )}
     </Disclosure>
-  );
-};
+  )
+}

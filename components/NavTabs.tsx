@@ -1,8 +1,8 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
-import classNames from 'classnames';
+import Link from "next/link"
+import { usePathname, useSelectedLayoutSegments } from "next/navigation"
+import classNames from "classnames"
 
 const Arrow = () => (
   <svg
@@ -20,22 +20,22 @@ const Arrow = () => (
       d="M8.25 4.5l7.5 7.5-7.5 7.5"
     />
   </svg>
-);
+)
 
 export const NavTabs = () => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const segments = useSelectedLayoutSegments();
+  const segments = useSelectedLayoutSegments()
 
   const getSegmentLabel = (label: string, path: string) => {
-    if (segments.length === 1) return label;
+    if (segments.length === 1) return label
 
-    const first = segments[0];
-    const last = segments[segments.length - 1];
+    const first = segments[0]
+    const last = segments[segments.length - 1]
 
-    if (!path?.startsWith(`/${first}`)) return label;
+    if (!path?.startsWith(`/${first}`)) return label
 
-    return last === 'create' ? (
+    return last === "create" ? (
       <>
         <span>{label}</span>
         <Arrow />
@@ -47,8 +47,8 @@ export const NavTabs = () => {
         <Arrow />
         <span>Edit</span>
       </>
-    );
-  };
+    )
+  }
 
   return (
     <div
@@ -58,16 +58,16 @@ export const NavTabs = () => {
       <Link
         href="/resumes"
         className={classNames(
-          'flex whitespace-nowrap max-w-xs truncate focus:outline-none focus:ring-0 px-1 py-2 -mb-px text-sm font-medium',
-          pathname?.startsWith('/resumes')
-            ? 'text-blue-500 border-blue-500 border-b-2'
-            : 'border-transparent text-gray-400 hover:text-gray-500 hover:border-gray-500 hover:border-b-2'
+          "flex whitespace-nowrap max-w-xs truncate focus:outline-none focus:ring-0 px-1 py-2 -mb-px text-sm font-medium",
+          pathname?.startsWith("/resumes")
+            ? "text-blue-500 border-blue-500 border-b-2"
+            : "border-transparent text-gray-400 hover:text-gray-500 hover:border-gray-500 hover:border-b-2"
         )}
       >
         <p className="flex items-center space-x-1 text-sm whitespace-nowrap">
-          {getSegmentLabel('Resumes', '/resumes')}
+          {getSegmentLabel("Resumes", "/resumes")}
         </p>
       </Link>
     </div>
-  );
-};
+  )
+}

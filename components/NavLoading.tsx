@@ -12,5 +12,5 @@ export const NavLoading = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}

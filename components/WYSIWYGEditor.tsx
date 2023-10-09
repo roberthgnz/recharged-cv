@@ -1,16 +1,16 @@
-'use client';
+"use client"
 
-import { useRef } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+import { useRef } from "react"
+import { Editor } from "@tinymce/tinymce-react"
 
 export const WYSIWYGEditor = ({ value, onChange }: any) => {
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<any>(null)
 
   return (
     <>
       <Editor
         tinymceScriptSrc={
-          'https://cdn.tiny.cloud/1/mxnwduf36nbk4p2rbj6jh7otmulfl1cdc9y9nf6k1hhmuxrh/tinymce/6/tinymce.min.js'
+          "https://cdn.tiny.cloud/1/mxnwduf36nbk4p2rbj6jh7otmulfl1cdc9y9nf6k1hhmuxrh/tinymce/6/tinymce.min.js"
         }
         onInit={(_, editor) => (editorRef.current = editor)}
         init={{
@@ -18,18 +18,18 @@ export const WYSIWYGEditor = ({ value, onChange }: any) => {
           height: 300,
           menubar: false,
           plugins: [
-            'advlist',
-            'autolink',
-            'lists',
-            'link',
-            'anchor',
-            'help',
-            'wordcount'
-          ]
+            "advlist",
+            "autolink",
+            "lists",
+            "link",
+            "anchor",
+            "help",
+            "wordcount",
+          ],
         }}
         value={value}
         onEditorChange={onChange}
       />
     </>
-  );
-};
+  )
+}

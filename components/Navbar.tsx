@@ -1,32 +1,31 @@
-'use client';
+"use client"
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { Fragment, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { signIn, signOut } from 'next-auth/react';
-
-import classNames from 'classnames';
+import { Fragment, useState } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Disclosure, Menu, Transition } from "@headlessui/react"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
+import classNames from "classnames"
+import { signIn, signOut } from "next-auth/react"
 
 export const Navbar = ({ user }: { user: any }) => {
-  const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState(false);
+  const pathname = usePathname()
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSignIn = async () => {
-    setIsLoading(true);
-    await signIn('github');
-    setIsLoading(false);
-  };
+    setIsLoading(true)
+    await signIn("github")
+    setIsLoading(false)
+  }
 
   return (
     <Disclosure
       as="nav"
-      className={classNames('w-full top-0 bg-white/0 z-30 transition-all', {
+      className={classNames("w-full top-0 bg-white/0 z-30 transition-all", {
         fixed:
-          !pathname?.startsWith('/resumes') &&
-          !pathname?.startsWith('/cover-letters')
+          !pathname?.startsWith("/resumes") &&
+          !pathname?.startsWith("/cover-letters"),
       })}
     >
       {({ open }) => (
@@ -46,11 +45,11 @@ export const Navbar = ({ user }: { user: any }) => {
                       <Image
                         className="h-8 w-8 rounded-full"
                         src={
-                          user?.image || 'https://avatar.vercel.sh/roberthgnz'
+                          user?.image || "https://avatar.vercel.sh/roberthgnz"
                         }
                         height={32}
                         width={32}
-                        alt={`${user?.name || 'placeholder'} avatar`}
+                        alt={`${user?.name || "placeholder"} avatar`}
                       />
                     </Menu.Button>
                   </div>
@@ -69,8 +68,8 @@ export const Navbar = ({ user }: { user: any }) => {
                           {({ active }) => (
                             <button
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'flex w-full px-4 py-2 text-sm text-gray-700'
+                                active ? "bg-gray-100" : "",
+                                "flex w-full px-4 py-2 text-sm text-gray-700"
                               )}
                               onClick={() => signOut()}
                             >
@@ -83,10 +82,10 @@ export const Navbar = ({ user }: { user: any }) => {
                           {({ active }) => (
                             <button
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'flex w-full px-4 py-2 text-sm text-gray-700'
+                                active ? "bg-gray-100" : "",
+                                "flex w-full px-4 py-2 text-sm text-gray-700"
                               )}
-                              onClick={() => signIn('github')}
+                              onClick={() => signIn("github")}
                             >
                               Sign in
                             </button>
@@ -150,7 +149,7 @@ export const Navbar = ({ user }: { user: any }) => {
                     className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 :disabled:bg-gray-100 :disabled:text-gray-800"
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Loading...' : 'Sign in'}
+                    {isLoading ? "Loading..." : "Sign in"}
                   </button>
                 </div>
               )}
@@ -159,5 +158,5 @@ export const Navbar = ({ user }: { user: any }) => {
         </>
       )}
     </Disclosure>
-  );
-};
+  )
+}

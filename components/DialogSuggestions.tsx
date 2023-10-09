@@ -1,90 +1,89 @@
-'use client';
-import { useRef, useState } from 'react';
-import { useOnClickOutside } from 'usehooks-ts';
-import { Button, Text, TextInput } from '@tremor/react';
-import { toast } from 'react-hot-toast';
+"use client"
+
+import { useRef, useState } from "react"
+import { toast } from "react-hot-toast"
+import { useOnClickOutside } from "usehooks-ts"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export const DialogSuggestions = ({
   prompt,
   defaultContext,
-  defaultGeneratedText = '1. Results-driven software engineer with 5+ years of experience in Python development. Proficient in React and passionate about building innovative solutions for complex problems. \n2. Highly skilled and detail-oriented Python developer with expertise in React. Committed to delivering high-quality software products that exceed client expectations. \n3. Experienced software engineer with a strong background in Python and React. Excels at collaborating with cross-functional teams to develop innovative solutions to complex problems. \n4. Expert software engineer with 5+ years of experience in Python development. Skilled in React and passionate about building innovative solutions for complex problems.',
+  defaultGeneratedText = "1. Results-driven software engineer with 5+ years of experience in Python development. Proficient in React and passionate about building innovative solutions for complex problems. \n2. Highly skilled and detail-oriented Python developer with expertise in React. Committed to delivering high-quality software products that exceed client expectations. \n3. Experienced software engineer with a strong background in Python and React. Excels at collaborating with cross-functional teams to develop innovative solutions to complex problems. \n4. Expert software engineer with 5+ years of experience in Python development. Skilled in React and passionate about building innovative solutions for complex problems.",
   onClose,
-  onSelect
+  onSelect,
 }: any) => {
-  const ref = useRef(null);
+  const ref = useRef(null)
 
-  const [loading, setLoading] = useState(false);
-  const [context, setContext] = useState(defaultContext || '');
+  const [loading, setLoading] = useState(false)
+  const [context, setContext] = useState(defaultContext || "")
 
-  const [generatedText, setGeneratedText] = useState(defaultGeneratedText);
+  const [generatedText, setGeneratedText] = useState(defaultGeneratedText)
 
   const generate = async (e: any) => {
-    e.preventDefault();
-    setGeneratedText('');
-    setLoading(true);
+    e.preventDefault()
+    setGeneratedText("")
+    setLoading(true)
 
     const _prompt =
       prompt ||
       `Generate 4 Professional and energetic CV summary clearly labeling each section 1. 2. 3. 4.
-      Make sure each generated summary is at least 150 and 200 max characters based on this context: ${context}`;
+      Make sure each generated summary is at least 150 and 200 max characters based on this context: ${context}`
 
-    const response = await fetch('/api/generate', {
-      method: 'POST',
+    const response = await fetch("/api/generate", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: _prompt
-      })
-    });
+        prompt: _prompt,
+      }),
+    })
 
     if (!response.ok) {
-      return toast.error(response.statusText);
+      return toast.error(response.statusText)
     }
 
     // This data is a ReadableStream
-    const data = response.body;
+    const data = response.body
     if (!data) {
-      return;
+      return
     }
 
-    const reader = data.getReader();
-    const decoder = new TextDecoder();
-    let done = false;
+    const reader = data.getReader()
+    const decoder = new TextDecoder()
+    let done = false
 
     while (!done) {
-      const { value, done: doneReading } = await reader.read();
-      done = doneReading;
-      const chunkValue = decoder.decode(value);
-      setGeneratedText((prev: string) => prev + chunkValue);
+      const { value, done: doneReading } = await reader.read()
+      done = doneReading
+      const chunkValue = decoder.decode(value)
+      setGeneratedText((prev: string) => prev + chunkValue)
     }
 
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   useOnClickOutside(ref, (e) => {
-    if (loading) return;
-    onClose(e);
-  });
+    if (loading) return
+    onClose(e)
+  })
 
   return (
     <div ref={ref} className="w-full p-3 border bg-white shadow-lg rounded-md">
       <form onSubmit={generate}>
         <div className="flex items-center space-x-3">
-          <TextInput
+          <Input
             value={context}
-            onChange={(e) => setContext(e.target.value)}
+            onChange={(e: any) => setContext(e.target.value)}
             className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
             placeholder={
               'Use keywords and job title. e.g. "software engineer, python, react"'
             }
             disabled={loading}
           />
-          <Button
-            loading={loading}
-            loadingText="Generating..."
-            onClick={generate}
-          >
+          <Button disabled={loading} onClick={generate}>
             Generate
           </Button>
         </div>
@@ -106,19 +105,19 @@ export const DialogSuggestions = ({
                     </div>
                     <div
                       onClick={() => {
-                        onSelect(generated.trim());
+                        onSelect(generated.trim())
                       }}
                     >
-                      <Text className="cursor-pointer select-none rounded-md hover:bg-blue-100">
+                      <span className="cursor-pointer select-none rounded-md hover:bg-blue-100">
                         {generated}
-                      </Text>
+                      </span>
                     </div>
                   </div>
-                );
+                )
               })}
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}

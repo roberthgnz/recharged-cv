@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import Image from "next/image"
 
-import { CTAButton } from './CTAButton';
-import { AtroposWrapper } from './AtroposWrapper';
+import { AtroposWrapper } from "./AtroposWrapper"
+import { CTAButton } from "./CTAButton"
 
 export const Hero = () => {
   return (
@@ -31,8 +31,8 @@ export const Hero = () => {
               width={700}
               height={350}
               style={{
-                width: '100%',
-                height: 'auto'
+                width: "100%",
+                height: "auto",
               }}
               priority
             />
@@ -46,8 +46,8 @@ export const Hero = () => {
               width={700}
               height={350}
               style={{
-                width: '100%',
-                height: 'auto'
+                width: "100%",
+                height: "auto",
               }}
               priority
             />
@@ -55,5 +55,5 @@ export const Hero = () => {
         </AtroposWrapper>
       </div>
     </div>
-  );
-};
+  )
+}

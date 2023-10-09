@@ -1,58 +1,65 @@
-'use client';
-import { useCallback, useContext, useEffect, useRef } from 'react';
-import { CVEditorScoreContext } from '@/cv-editor-score';
-import { Badge, Text } from '@tremor/react';
+"use client"
 
-import ReactCanvasConfetti from 'react-canvas-confetti';
+import { useCallback, useContext, useEffect, useRef } from "react"
+import { CVEditorScoreContext } from "@/cv-editor-score"
+import ReactCanvasConfetti from "react-canvas-confetti"
+
+import { Badge } from "@/components/ui/badge"
 
 const colors: any = {
-  0: 'bg-red-500',
-  25: 'bg-yellow-500',
-  50: 'bg-yellow-500',
-  75: 'bg-green-500',
-  100: 'bg-green-500'
-};
+  0: "bg-red-500",
+  25: "bg-yellow-500",
+  50: "bg-yellow-500",
+  75: "bg-green-500",
+  100: "bg-green-500",
+}
 
 const canvasStyles = {
-  position: 'fixed',
-  pointerEvents: 'none',
-  width: '100%',
-  height: '100%',
+  position: "fixed",
+  pointerEvents: "none",
+  width: "100%",
+  height: "100%",
   top: 0,
-  left: 0
-};
+  left: 0,
+}
 
 export const ResumeScore = () => {
-  const refAnimationInstance = useRef<any>(null);
+  const refAnimationInstance = useRef<any>(null)
 
-  const { state: score } = useContext(CVEditorScoreContext);
+  const { state: score } = useContext(CVEditorScoreContext)
 
   const color = Object.keys(colors).reduce((acc, key) => {
     if (score >= Number(key)) {
-      return colors[key];
+      return colors[key]
     }
-    return acc;
-  }, 'red');
+    return acc
+  }, "red")
 
   const getInstance = useCallback((instance: any) => {
-    refAnimationInstance.current = instance;
-  }, []);
+    refAnimationInstance.current = instance
+  }, [])
 
   const startAnimation = () => {
-    refAnimationInstance.current();
-  };
+    refAnimationInstance.current()
+  }
 
   useEffect(() => {
     if (score === 100) {
-      startAnimation();
+      startAnimation()
     }
-  }, [score]);
+  }, [score])
 
   return (
     <div>
       <div className="flex items-center space-x-3">
-        <Badge color={color.split('-')[1] as any}>{score}%</Badge>{' '}
-        <Text className="text-white">Resume score</Text>
+        <Badge
+          style={{
+            color: color.split("-")[1] as any,
+          }}
+        >
+          {score}%
+        </Badge>{" "}
+        <span className="text-white">Resume score</span>
       </div>
       <div className="h-0.5 bg-gray-200">
         <div
@@ -65,5 +72,5 @@ export const ResumeScore = () => {
         style={canvasStyles as any}
       />
     </div>
-  );
-};
+  )
+}

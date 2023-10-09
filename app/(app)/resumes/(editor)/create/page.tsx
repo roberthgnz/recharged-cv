@@ -1,35 +1,33 @@
-import { Grid } from '@tremor/react';
+import { CVEditorProvider } from "@/cv-editor"
+import { CVEditorScoreProvider } from "@/cv-editor-score"
 
-import { CVEditorProvider } from '@/cv-editor';
-import { CVEditorScoreProvider } from '@/cv-editor-score';
-
-import { CVForm } from '@/components/CVForm';
-import { CVEditorPreview } from '@/components/CVEditorPreview';
+import { CVEditorPreview } from "@/components/CVEditorPreview"
+import { CVForm } from "@/components/CVForm"
 
 export default async function Page() {
   const defaultState = {
     personaldata: {},
     futurejob: {},
     experience: {
-      experience: []
+      experience: [],
     },
     education: {
-      education: []
+      education: [],
     },
     skills: {
       expertise: [],
-      language: []
-    }
-  };
+      language: [],
+    },
+  }
 
   return (
     <CVEditorProvider>
       <CVEditorScoreProvider>
-        <Grid className="h-full mt-6" numCols={2}>
+        <div className="grid grid-cols- 2 h-full mt-6">
           <CVForm defaultState={defaultState} />
           <CVEditorPreview />
-        </Grid>
+        </div>
       </CVEditorScoreProvider>
     </CVEditorProvider>
-  );
+  )
 }

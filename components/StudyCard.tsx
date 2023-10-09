@@ -1,7 +1,8 @@
-import { Badge, Text, Subtitle, Button } from '@tremor/react';
-import { Edit } from 'lucide-react';
+import { formatDate } from "@/utils/date"
+import { Edit } from "lucide-react"
 
-import { formatDate } from '@/utils/date';
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export const StudyCard = ({
   id,
@@ -11,27 +12,23 @@ export const StudyCard = ({
   startingDate,
   finishingDate,
   stillEnrolled,
-  onEdit
+  onEdit,
 }: any) => {
   return (
     <div className="p-4 border rounded-md">
       <div className="flex items-center justify-between">
-        <Badge size="xs">{educationLevel}</Badge>
-        <Button
-          size="xs"
-          variant="light"
-          icon={Edit}
-          onClick={() => onEdit(id)}
-        >
+        <Badge>{educationLevel}</Badge>
+        <Button variant="secondary" onClick={() => onEdit(id)}>
+          <Edit className="mr-2 h-4 w-4" />
           Edit
         </Button>
       </div>
-      <Subtitle className="my-1 font-bold">{courseName}</Subtitle>
-      {institutionName && <Text className="text-xs">{institutionName}</Text>}
-      <Text className="text-xs">
-        {formatDate(startingDate)} -{' '}
-        {stillEnrolled ? 'Present' : formatDate(finishingDate)}
-      </Text>
+      <h2 className="my-1 font-bold">{courseName}</h2>
+      {institutionName && <span className="text-xs">{institutionName}</span>}
+      <span className="text-xs">
+        {formatDate(startingDate)} -{" "}
+        {stillEnrolled ? "Present" : formatDate(finishingDate)}
+      </span>
     </div>
-  );
-};
+  )
+}
