@@ -1,6 +1,7 @@
 'use client';
 import { signIn } from 'next-auth/react';
 import { Button } from '@tremor/react';
+import { useState } from 'react';
 
 const GithubIcon = () => (
   <svg viewBox="0 0 438.549 438.549" className="mr-2 h-4 w-4">
@@ -12,8 +13,16 @@ const GithubIcon = () => (
 );
 
 export const GithubLoginButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSignIn = async () => {
+    setIsLoading(true);
+    await signIn('github');
+    setIsLoading(false);
+  };
+
   return (
-    <Button onClick={() => signIn('github')} size="xl" className="px-8">
+    <Button onClick={onSignIn} size="xl" className="px-8" loading={isLoading}>
       <span className="flex">
         <GithubIcon />
         Continue with Github

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -12,6 +12,13 @@ import classNames from 'classnames';
 
 export const Navbar = ({ user }: { user: any }) => {
   const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSignIn = async () => {
+    setIsLoading(true);
+    await signIn('github');
+    setIsLoading(false);
+  };
 
   return (
     <Disclosure
@@ -138,10 +145,12 @@ export const Navbar = ({ user }: { user: any }) => {
               ) : (
                 <div className="mt-3 space-y-1">
                   <button
-                    onClick={() => signIn('github')}
-                    className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                    type="button"
+                    onClick={onSignIn}
+                    className="flex w-full px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 :disabled:bg-gray-100 :disabled:text-gray-800"
+                    disabled={isLoading}
                   >
-                    Sign in
+                    {isLoading ? 'Loading...' : 'Sign in'}
                   </button>
                 </div>
               )}
