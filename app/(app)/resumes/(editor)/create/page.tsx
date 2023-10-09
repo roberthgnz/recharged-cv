@@ -23,7 +23,7 @@ export default async function Page() {
   return (
     <CVEditorProvider>
       <CVEditorScoreProvider>
-        <div className="grid grid-cols- 2 h-full mt-6">
+        <div className="mt-6 grid h-full grid-cols-2">
           <CVForm defaultState={defaultState} />
           <CVEditorPreview />
         </div>
