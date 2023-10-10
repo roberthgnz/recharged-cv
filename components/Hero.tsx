@@ -21,9 +21,6 @@ export const Hero = () => {
 
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: {
-        emailRedirectTo: "https://www.rcv.digital/",
-      },
     })
 
     if (error) {
