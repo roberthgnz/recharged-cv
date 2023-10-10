@@ -28,7 +28,7 @@ export const Navbar = ({ user }: { user: any }) => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
-                <h1 className="flex shrink-0 items-center font-bold text-white">
+                <h1 className="flex shrink-0 items-center font-bold ">
                   <Link href="/">Recharged CV</Link>
                 </h1>
               </div>

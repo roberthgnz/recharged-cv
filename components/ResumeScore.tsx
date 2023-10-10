@@ -59,7 +59,7 @@ export const ResumeScore = () => {
         >
           {score}%
         </Badge>{" "}
-        <span className="text-white">Resume score</span>
+        <span className="">Resume score</span>
       </div>
       <div className="h-0.5 bg-gray-200">
         <div

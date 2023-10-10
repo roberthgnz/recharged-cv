@@ -1,12 +1,13 @@
-import { Suspense } from "react"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "react-hot-toast"
 
 import "../globals.css"
 
+import Image from "next/image"
+import Link from "next/link"
+
 import { Footer } from "@/components/Footer"
-import { Nav } from "@/components/Nav"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -22,18 +23,20 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full bg-black text-white">
+    <html lang="en">
       <body className={`h-full ${inter.className}`}>
-        <div
-          className="fixed h-screen w-full bg-cover bg-no-repeat bg-gradient-to-br from-black via-blue-50 to-rose-100"
-          style={{
-            backgroundImage: "url(/background.png)",
-            backgroundPosition: "50%",
-          }}
-        ></div>
-        <Suspense fallback="...">
-          <Nav />
-        </Suspense>
+        <header className="fixed left-1/2 top-5 z-30 mx-auto w-full max-w-7xl  -translate-x-1/2 overflow-hidden rounded-full px-4 sm:px-6 lg:px-8">
+          <div className="absolute inset-x-0 z-20 h-full w-full glass-xl/16 ">
+            <div className="absolute inset-0 bg-white/[0.025]"></div>
+            <div className="absolute inset-0 glass-edge-3xl"></div>
+          </div>
+          <nav className="relative z-30 flex h-16 justify-center">
+            <h1 className="flex shrink-0 items-center font-bold ">
+              <Link href="/">Recharged CV</Link>
+            </h1>
+          </nav>
+        </header>
+
         <main className="flex min-h-screen w-full flex-col items-center justify-center py-16">
           {children}
         </main>

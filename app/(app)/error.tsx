@@ -24,7 +24,7 @@ export default function Error({
         <Link
           href={`https://github.com/roberthgnz/recharged-cv/issues/new`}
           target="_blank"
-          className="flex-shrink-0 inline-flex justify-center items-center group focus:outline-none focus:ring-2 focus:ring-offset-2 font-medium rounded-md border shadow-sm px-2.5 py-1.5 text-xs text-white bg-[#ef4444] border-[#ef4444]"
+          className="flex-shrink-0 inline-flex justify-center items-center group focus:outline-none focus:ring-2 focus:ring-offset-2 font-medium rounded-md border shadow-sm px-2.5 py-1.5 text-xs  bg-[#ef4444] border-[#ef4444]"
         >
           Report as issue
         </Link>
