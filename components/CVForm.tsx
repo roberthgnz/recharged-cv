@@ -23,7 +23,7 @@ const WYSIWYGEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-[300px] border-2 border-[#eee] rounded-[10px] bg-gray-300 animate-pulse"></div>
+      <div className="h-[300px] w-full animate-pulse rounded-[10px] border-2 border-[#eee] bg-gray-300"></div>
     ),
   }
 )
@@ -66,11 +66,11 @@ export const CVForm = ({ defaultState }: any) => {
   }, [defaultState])
 
   return (
-    <div className="h-full bg-white p-4 relative">
+    <div className="relative h-full bg-white p-4">
       <Title className="font-extrabold">Personal Details</Title>
-      <div className="grid grid-cols-2 gap-2 my-4">
+      <div className="my-4 grid grid-cols-2 gap-2">
         <div>
-          <h3 className="font-semibold text-emphasis">Job Title</h3>
+          <h3 className="text-emphasis font-semibold">Job Title</h3>
           <Input
             placeholder='e.g. "Software Engineer"'
             name="futurejob.preferredPosition"
@@ -79,7 +79,7 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
         <div>
-          <h3 className="font-semibold text-emphasis">Date of Birth</h3>
+          <h3 className="text-emphasis font-semibold">Date of Birth</h3>
           <Input
             // @ts-ignore
             type="date"
@@ -90,9 +90,9 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 mb-4">
+      <div className="mb-4 grid grid-cols-2 gap-2">
         <div>
-          <h3 className="font-semibold text-emphasis">First Name</h3>
+          <h3 className="text-emphasis font-semibold">First Name</h3>
           <Input
             name="personaldata.name"
             value={state.personaldata.name}
@@ -100,7 +100,7 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
         <div>
-          <h3 className="font-semibold text-emphasis">Last Name</h3>
+          <h3 className="text-emphasis font-semibold">Last Name</h3>
           <Input
             name="personaldata.surname1"
             value={state.personaldata.surname1}
@@ -108,9 +108,9 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 mb-4">
+      <div className="mb-4 grid grid-cols-2 gap-2">
         <div>
-          <h3 className="font-semibold text-emphasis">Email</h3>
+          <h3 className="text-emphasis font-semibold">Email</h3>
           <Input
             name="personaldata.email"
             value={state.personaldata.email}
@@ -118,7 +118,7 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
         <div>
-          <h3 className="font-semibold text-emphasis">Phone</h3>
+          <h3 className="text-emphasis font-semibold">Phone</h3>
           <Input
             name="personaldata.mobilePhone"
             value={state.personaldata.mobilePhone}
@@ -126,9 +126,9 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 mb-4">
+      <div className="mb-4 grid grid-cols-2 gap-2">
         <div>
-          <h3 className="font-semibold text-emphasis">City</h3>
+          <h3 className="text-emphasis font-semibold">City</h3>
           <Input
             name="personaldata.cityName"
             value={state.personaldata.cityName}
@@ -136,7 +136,7 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
         <div>
-          <h3 className="font-semibold text-emphasis">ZIP Code</h3>
+          <h3 className="text-emphasis font-semibold">ZIP Code</h3>
           <Input
             name="personaldata.zipCode"
             value={state.personaldata.zipCode}
@@ -144,10 +144,10 @@ export const CVForm = ({ defaultState }: any) => {
           />
         </div>
       </div>
-      <div className="flex justify-between items-end mt-8">
+      <div className="mt-8 flex items-end justify-between">
         <div>
           <Title className="font-extrabold">Professional Summary</Title>
-          <h3 className="text-sm my-4">
+          <h3 className="my-4 text-sm">
             Write 2-4 short & energetic sentences to interest the reader!
             Mention your role, experience & most importantly - your biggest
             achievements, best qualities and skills.
@@ -171,7 +171,7 @@ export const CVForm = ({ defaultState }: any) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="w-[250%] absolute -right-64 -top-1 z-10">
+            <div className="absolute -right-64 -top-1 z-10 w-[33.33vw]">
               <DialogSuggestions
                 onSelect={onChangeEditor}
                 onClose={() => setIsShowingSummary(false)}
@@ -184,8 +184,8 @@ export const CVForm = ({ defaultState }: any) => {
         value={state.personaldata.summary}
         onChange={onChangeEditor}
       />
-      <Title className="font-extrabold mt-8">Employment History</Title>
-      <h3 className="text-sm my-4">
+      <Title className="mt-8 font-extrabold">Employment History</Title>
+      <h3 className="my-4 text-sm">
         Highlight your pertinent expertise within the past decade. Employ bullet
         points to emphasize your accomplishments, preferably supported by
         quantifiable data (Attained X, quantified by Y, through Z methodology).
@@ -218,8 +218,8 @@ export const CVForm = ({ defaultState }: any) => {
         <PlusIcon className="mr-2 h-4 w-4" />
         Add experience
       </Button>
-      <Title className="font-extrabold mt-8">Education</Title>
-      <h3 className="text-sm my-4">
+      <Title className="mt-8 font-extrabold">Education</Title>
+      <h3 className="my-4 text-sm">
         A diverse educational background showcased on your resume encapsulates
         the wealth of knowledge and unique perspectives you possess, enhancing
         the immense value you can contribute to any job.
@@ -248,8 +248,8 @@ export const CVForm = ({ defaultState }: any) => {
         <PlusIcon className="mr-2 h-4 w-4" />
         Add education
       </Button>
-      <Title className="font-extrabold mt-8">Skills</Title>
-      <h3 className="text-sm my-4">
+      <Title className="mt-8 font-extrabold">Skills</Title>
+      <h3 className="my-4 text-sm">
         Choose 5 important skills that show you fit the position. Make sure they
         match the key skills mentioned in the job listing (especially when
         applying via an online system).
@@ -260,8 +260,8 @@ export const CVForm = ({ defaultState }: any) => {
         ))}
         <SkillCard isNew={true} />
       </div>
-      <Title className="font-extrabold mt-8">Languages</Title>
-      <div className="space-y-3 mt-4">
+      <Title className="mt-8 font-extrabold">Languages</Title>
+      <div className="mt-4 space-y-3">
         {state.skills.language.map((item: any) => (
           <LanguageCard key={item.skill} id={item.id} level={item.speaking} />
         ))}

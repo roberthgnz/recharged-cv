@@ -113,7 +113,7 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
   }
 
   return (
-    <Card className="p-4 border rounded-md">
+    <Card className="rounded-md border p-4">
       <div className="grid grid-cols-2 gap-2">
         <div className="col-span-2">
           <span className="mt-4">Job title</span>
@@ -153,7 +153,7 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
           />
         </div>
         <div className="col-span-2">
-          <div className="flex justify-between items-end my-4">
+          <div className="my-4 flex items-end justify-between">
             <div>
               <span className="mb-4">
                 Description <span className="text-gray-400">(optional)</span>
@@ -178,7 +178,7 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <div className="w-[250%] absolute -right-64 -top-1 z-10">
+                <div className="absolute -right-64 -top-1 z-10 w-[33.33vw]">
                   <DialogSuggestions
                     prompt={prompt}
                     defaultContext={experience.job}
@@ -203,7 +203,7 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
           />
         </div>
       </div>
-      <div className="flex justify-between mt-6">
+      <div className="mt-6 flex justify-between">
         {!isNew ? (
           <div>
             <Button variant="destructive" onClick={onDelete}>

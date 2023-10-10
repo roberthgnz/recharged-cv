@@ -106,13 +106,12 @@ export const DialogSuggestions = ({
                       {index + 1}
                     </div>
                     <div
+                      className="cursor-pointer select-none rounded-md tracking-tight hover:bg-blue-100"
                       onClick={() => {
                         onSelect(generated.trim())
                       }}
                     >
-                      <span className="cursor-pointer select-none rounded-md hover:bg-blue-100">
-                        {generated}
-                      </span>
+                      {generated}
                     </div>
                   </div>
                 )
