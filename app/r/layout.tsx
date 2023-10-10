@@ -5,8 +5,7 @@ import "../globals.css"
 
 export const metadata = {
   title: "Recharged CV",
-  description:
-    "Create Your Perfect CV: Empower Your Career with our Resume Generator!",
+  description: "AI Resume Builder",
 }
 
 const inter = Inter({ subsets: ["latin"] })

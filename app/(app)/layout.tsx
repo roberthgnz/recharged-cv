@@ -1,9 +1,10 @@
 import { Suspense } from "react"
 import { Inter } from "next/font/google"
 import { redirect } from "next/navigation"
-import { getServerSession } from "@/utils/auth"
 import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "react-hot-toast"
+
+import { getServerSession } from "@/utils/auth"
 
 import "../globals.css"
 
@@ -17,8 +18,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: "Recharged CV",
-  description:
-    "Create Your Perfect CV: Empower Your Career with our Resume Generator!",
+  description: "AI Resume Builder",
 }
 
 export default async function RootLayout({
