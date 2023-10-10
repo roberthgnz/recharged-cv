@@ -4,7 +4,10 @@ import type { NextRequest } from "next/server"
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 import kv from "@vercel/kv"
 
-export async function POST(req: NextRequest) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { uuid: string } }
+) {
   const cookieStore = cookies()
   const supabase = createRouteHandlerClient({
     cookies: () => cookieStore,
@@ -22,12 +25,19 @@ export async function POST(req: NextRequest) {
     cv?: any
   }
 
-  const uuid = crypto.randomUUID()
-  const timestamp = Date.now()
+  const uuid = params.uuid
+
+  if (!uuid) return NextResponse.json({ error: "UUID is required" })
 
   try {
-    await kv.set(`shared-cv-${uuid}`, { cv, timestamp })
-    return NextResponse.json({ url: `/r/${uuid}` })
+    const userId = session.user.id
+    const createdAt = Date.now()
+
+    const payload = { userId, uuid, cv, createdAt }
+
+    await kv.hset(`user:${userId}:cv:${uuid}`, payload)
+
+    return NextResponse.json({ success: true })
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: "Something went wrong" })

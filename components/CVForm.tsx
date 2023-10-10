@@ -155,7 +155,6 @@ export const CVForm = ({ defaultState }: any) => {
         </div>
         <div className="relative mb-4">
           <Button
-            color="secondary"
             onClick={() => setIsShowingSummary(true)}
             disabled={isShowingSummary}
           >
@@ -211,7 +210,7 @@ export const CVForm = ({ defaultState }: any) => {
         )}
       </div>
       <Button
-        color="secondary"
+        variant="secondary"
         className="my-4"
         onClick={() => setIsNewExperience(true)}
       >
@@ -241,7 +240,7 @@ export const CVForm = ({ defaultState }: any) => {
         )}
       </div>
       <Button
-        color="secondary"
+        variant="secondary"
         className="my-4"
         onClick={() => setIsNewEducation(true)}
       >

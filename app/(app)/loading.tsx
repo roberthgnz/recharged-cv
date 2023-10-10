@@ -2,9 +2,9 @@ import { Card } from "@/components/ui/card"
 
 export default function Loading() {
   return (
-    <div className="md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 animation-pulse">
+    <div className="animation-pulse mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 3 }).map((_, index) => (
-        <Card key={index} className="h-[120px]" />
+        <Card key={index} className="h-[205px]" />
       ))}
     </div>
   )

@@ -147,7 +147,6 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
             id="working"
             checked={experience.onCourse}
             onCheckedChange={(value: any) => {
-              console.log(value)
               setExperience((prev: any) => ({ ...prev, onCourse: value }))
             }}
           />
@@ -161,7 +160,6 @@ export const ExperienceEditor = ({ isNew, experienceId, onCancel }: any) => {
             </div>
             <div className="relative">
               <Button
-                color="secondary"
                 className="ring-0 focus:ring-0"
                 onClick={() => setIsShowingSuggestions(true)}
                 disabled={isShowingSuggestions || !experience.job}

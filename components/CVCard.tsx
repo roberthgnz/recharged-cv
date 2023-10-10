@@ -1,34 +1,33 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { FiEdit2, FiTrash } from "react-icons/fi"
 
-import { Card } from "@/components/ui/card"
-import { Title } from "@/components/ui/title"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
-type CV = {
-  id: number
-  code: string
-  name: string
-  completed: boolean
-  principal: boolean
-  incompleteSteps: string[]
-}
+import { Button } from "./ui/button"
 
-export const CVCard = ({ code, name, completed }: CV) => {
-  const router = useRouter()
-
-  const legendText = completed ? "Completed" : "Incomplete"
-  const legendColor = completed ? "green" : "red"
-
+export const CVCard = ({ uuid, cv }: any) => {
   return (
-    <Card
-      className="h-full flex flex-col justify-between cursor-pointer hover:shadow-sm hover:opacity-75 transition"
-      onClick={() => router.push(`/resumes/${code}`)}
-    >
-      <div className="flex mb-6 items-center justify-between">
-        <Title>{name}</Title>
-        {/* <Legend categories={[legendText]} colors={[legendColor]} /> */}
-      </div>
+    <Card className="flex h-full flex-col justify-between">
+      <CardHeader>
+        CV <small>{uuid}</small>
+      </CardHeader>
+      <CardContent>Lorem ipsum dolor sit amet consectetur</CardContent>
+      <CardFooter>
+        <div className="flex w-full justify-between">
+          <Button variant={"link"} className="text-destructive">
+            <FiTrash className="mr-2 h-4 w-4" />
+            Remove
+          </Button>
+          <Button variant={"link"} asChild>
+            <Link href={`/resumes/${uuid}`}>
+              <FiEdit2 className="mr-2 h-4 w-4" />
+              Edit
+            </Link>
+          </Button>
+        </div>
+      </CardFooter>
     </Card>
   )
 }

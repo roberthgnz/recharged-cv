@@ -4,27 +4,20 @@ import { PlusIcon } from "@heroicons/react/24/outline"
 import { CVCard } from "./CVCard"
 import { Card } from "./ui/card"
 
-type CV = {
-  id: number
-  code: string
-  name: string
-  completed: boolean
-  principal: boolean
-  incompleteSteps: string[]
-}
+export const Dashboard = ({ cvs }: { cvs: any[] }) => {
+  const cvUuid = crypto.randomUUID()
 
-export const Dashboard = ({ cvs }: { cvs: CV[] }) => {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+    <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {cvs.map((cv) => (
-        <CVCard key={cv.id} {...cv} />
+        <CVCard key={cv.uuid} {...cv} />
       ))}
-      <Card className="flex items-center justify-center text-blue-500 p-0 border-2 border-dotted ring-0 shadow-none">
+      <Card className="flex items-center justify-center border-2 border-dotted p-0 text-blue-500 shadow-none ring-0">
         <Link
-          href="/resumes/create"
-          className="flex items-center justify-center w-full h-full p-6"
+          href={`/resumes/${cvUuid}/`}
+          className="flex h-full w-full items-center justify-center p-6"
         >
-          <PlusIcon className="w-5 h-5 mr-3" />
+          <PlusIcon className="mr-3 h-5 w-5" />
           CREATE NEW RESUME
         </Link>
       </Card>

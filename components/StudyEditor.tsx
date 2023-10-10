@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react"
 import { CVEditorContext } from "@/cv-editor"
 import courses from "@/data/study-detail.json"
 import studies from "@/data/study.json"
-import { getStudy, getStudyDetails } from "@/utils/dictionary"
 import { SelectItem } from "@radix-ui/react-select"
 import { toast } from "react-hot-toast"
 
+import { getStudy, getStudyDetails } from "@/utils/dictionary"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -129,7 +129,7 @@ export const StudyEditor = ({ isNew, studyId, onCancel }: any) => {
   }
 
   return (
-    <Card className="p-4 border rounded-md space-y-4">
+    <Card className="space-y-4 rounded-md border p-4">
       <div className="space-y-2">
         <span>Title</span>
         <Select
@@ -205,14 +205,13 @@ export const StudyEditor = ({ isNew, studyId, onCancel }: any) => {
             id="studying"
             checked={study.stillEnrolled}
             onCheckedChange={(value: any) => {
-              console.log(value)
               setStudy((prev: any) => ({ ...prev, stillEnrolled: value }))
             }}
           />
         </div>
       </div>
 
-      <div className="flex justify-between mt-6">
+      <div className="mt-6 flex justify-between">
         {!isNew ? (
           <Button variant="destructive" onClick={onDelete}>
             Delete

@@ -2,7 +2,6 @@
 "use client"
 
 import { createContext, useEffect, useState } from "react"
-import { useLocalStorage } from "usehooks-ts"
 
 const defaultState = {
   personaldata: {},
@@ -28,19 +27,7 @@ export const CVEditorProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [localEditorData, setlocalEditorData] =
-    useLocalStorage<CVEditorContextState>("recharged-cv", null)
   const [state, setState] = useState<CVEditorContextState>(defaultState)
-
-  useEffect(() => {
-    if (localEditorData) {
-      setState(localEditorData)
-    }
-  }, [])
-
-  useEffect(() => {
-    setlocalEditorData(state)
-  }, [state])
 
   return (
     <CVEditorContext.Provider value={{ state, setState }}>

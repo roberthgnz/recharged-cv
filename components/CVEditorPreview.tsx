@@ -5,36 +5,24 @@ import Link from "next/link"
 import { CVEditorContext } from "@/cv-editor"
 import { CVEditorScoreContext } from "@/cv-editor-score"
 import languages from "@/data/language.json"
-import { formatDate } from "@/utils/date"
 import { LinkIcon } from "lucide-react"
 import { toast } from "react-hot-toast"
 
+import { formatDate } from "@/utils/date"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Title } from "@/components/ui/title"
 
+import { Autosaving } from "./Autosaving"
 import { ResumeScore } from "./ResumeScore"
 
 export const CVEditorPreview = () => {
-  const [isSharing, setIsSharing] = useState(false)
-
   const { state } = useContext<any>(CVEditorContext)
   const { state: score } = useContext(CVEditorScoreContext)
 
   const shareLink = async () => {
     try {
-      setIsSharing(true)
-      const response = await fetch("/api/cv/get-shareable-url", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cv: state }),
-      })
-
-      const data = await response.json()
-
-      const url = `${window.location.origin}${data.url}`
+      const url = window.location.pathname.replace("resumes", "r")
 
       if (!navigator.share) {
         navigator.clipboard.writeText(url)
@@ -51,8 +39,6 @@ export const CVEditorPreview = () => {
     } catch (error) {
       console.error(error)
       toast.error("Error generating link")
-    } finally {
-      setIsSharing(false)
     }
   }
 
@@ -75,8 +61,9 @@ export const CVEditorPreview = () => {
   }
 
   return (
-    <div className="relative h-full bg-gray-600 p-8">
+    <div className="relative h-full bg-gray-600 p-8 pt-16">
       <div className="h-hull sticky top-8">
+        <Autosaving cv={state} />
         <div className="h-[210mm] select-none">
           <Card className="h-full p-4">
             <Title className="text-lg font-bold">
@@ -215,7 +202,7 @@ export const CVEditorPreview = () => {
             </div>
           </Card>
           <div className="absolute bottom-2.5 right-0 space-x-3">
-            <Button onClick={shareLink} disabled={isSharing || !(score >= 50)}>
+            <Button onClick={shareLink} disabled={!(score >= 50)}>
               <LinkIcon className="mr-2 h-4 w-4" />
               Share Link
             </Button>

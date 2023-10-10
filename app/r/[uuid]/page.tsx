@@ -1,15 +1,13 @@
 import Link from "next/link"
-import { kv } from "@vercel/kv"
 
 import { Title } from "@/components/ui/title"
 import { SharedCVPreview } from "@/components/SharedCVPreview"
+import { getSharedCv } from "@/app/(app)/actions"
 
 export default async function Live({ params }: any) {
-  const code = params.code
+  const uuid = params.uuid
 
-  const data = await kv.get<{
-    cv: any
-  }>(`shared-cv-${code}`)
+  const data = (await getSharedCv(uuid)) as any
 
   if (!data) {
     return <div>Not found</div>
@@ -19,7 +17,7 @@ export default async function Live({ params }: any) {
     <>
       <Link
         href={"/"}
-        className="flex flex-shrink-0 items-center justify-center mb-4"
+        className="mb-4 flex shrink-0 items-center justify-center"
       >
         <Title className="font-bold text-black">Recharged CV</Title>
       </Link>

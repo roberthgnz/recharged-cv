@@ -6,7 +6,7 @@ import ReactCanvasConfetti from "react-canvas-confetti"
 
 import { Badge } from "@/components/ui/badge"
 
-const colors: any = {
+const colors: Record<number | string, string> = {
   0: "bg-red-500",
   25: "bg-yellow-500",
   50: "bg-yellow-500",
@@ -52,14 +52,8 @@ export const ResumeScore = () => {
   return (
     <div>
       <div className="flex items-center space-x-3">
-        <Badge
-          style={{
-            color: color.split("-")[1] as any,
-          }}
-        >
-          {score}%
-        </Badge>{" "}
-        <span className="">Resume score</span>
+        <Badge className={color}>{score}%</Badge>{" "}
+        <span className="text-white">Resume score</span>
       </div>
       <div className="h-0.5 bg-gray-200">
         <div
