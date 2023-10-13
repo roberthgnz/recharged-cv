@@ -6,7 +6,7 @@ export const Footer = ({ isDark = true, isFixed = true }) => {
     <footer
       className={classNames(
         "mx-auto w-full text-slate-500 py-5 text-center",
-        isDark && "bg-[#1e0825]",
+        isDark && "bg-white/[0.025]",
         isFixed && "absolute"
       )}
     >

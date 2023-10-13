@@ -1,9 +1,8 @@
 import { cookies } from "next/headers"
-import Link from "next/link"
 import { redirect } from "next/navigation"
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 
-import { Button } from "@/components/ui/button"
+import { Hero } from "@/components/Hero"
 
 export const dynamic = "force-dynamic"
 
@@ -20,13 +19,5 @@ export default async function Home() {
 
   if (user) redirect("/resumes")
 
-  return (
-    <div className="space-y-4 text-center">
-      <h1>WIP</h1>
-      <p>Work in progress</p>
-      <Button asChild>
-        <Link href={"/login"}>Sign In</Link>
-      </Button>
-    </div>
-  )
+  return <Hero />
 }
