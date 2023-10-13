@@ -5,13 +5,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 
 import { cn } from "@/lib/utils"
 
 export const Navbar = ({ user }: { user: any }) => {
-  const supabase = createClientComponentClient()
-
   const pathname = usePathname()
 
   return (
@@ -57,19 +54,21 @@ export const Navbar = ({ user }: { user: any }) => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black focus:outline-none">
                       {user ? (
                         <Menu.Item>
                           {({ active }) => (
-                            <button
-                              className={cn(
-                                active ? "bg-gray-100" : "",
-                                "flex w-full px-4 py-2 text-sm text-gray-700"
-                              )}
-                              onClick={() => supabase.auth.signOut()}
-                            >
-                              Sign out
-                            </button>
+                            <form action="/auth/sign-out" method="post">
+                              <button
+                                type="submit"
+                                className={cn(
+                                  active ? "bg-gray-100" : "",
+                                  "flex w-full px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Sign out
+                              </button>
+                            </form>
                           )}
                         </Menu.Item>
                       ) : (

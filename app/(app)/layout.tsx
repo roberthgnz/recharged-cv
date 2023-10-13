@@ -8,6 +8,8 @@ import { getServerSession } from "@/utils/auth"
 
 import "../globals.css"
 
+import Link from "next/link"
+
 import { Title } from "@/components/ui/title"
 import { Footer } from "@/components/Footer"
 import { Nav } from "@/components/Nav"
@@ -38,10 +40,12 @@ export default async function RootLayout({
         <Suspense fallback={<NavLoading />}>
           <Nav />
         </Suspense>
-        <div className="flex flex-col h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
-          <Title>My resumes</Title>
+        <div className="mx-auto my-8 flex h-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+          <Title>
+            <Link href="/">My resumes</Link>
+          </Title>
           <NavTabs />
-          <div className="flex-1 mb-8">{children}</div>
+          <div className="mb-8 flex-1">{children}</div>
           <Footer isDark={false} isFixed={false} />
         </div>
         <Toaster

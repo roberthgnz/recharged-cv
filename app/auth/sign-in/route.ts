@@ -12,6 +12,9 @@ export async function POST(request: Request) {
   const supabase = createRouteHandlerClient({ cookies: () => cookieStore })
   const { error } = await supabase.auth.signInWithOtp({
     email,
+    options: {
+      emailRedirectTo: `${requestUrl.origin}/auth/callback`,
+    },
   })
 
   if (error) {
