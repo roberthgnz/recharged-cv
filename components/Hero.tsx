@@ -31,6 +31,7 @@ export const Hero = () => {
                     name="email"
                     placeholder="Type your email"
                     className="border border-white/10 bg-white/10"
+                    required
                   />
                   <p className="text-xs text-muted-foreground">
                     If you already have an account, we&#39;ll log you in
