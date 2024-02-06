@@ -1,57 +1,56 @@
 "use server"
 
-import { kv } from "@vercel/kv"
+import { cookies } from "next/headers"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 
 export async function getCvs(userId?: string | null) {
-  if (!userId) {
-    return []
-  }
+  const cookieStore = cookies()
 
-  const cvs = await kv.keys(`user:${userId}:cv:*`)
-
-  if (!cvs) {
-    return []
-  }
+  const supabase = createServerComponentClient({
+    cookies: () => cookieStore,
+  })
 
   try {
-    const pipeline = kv.pipeline()
+    const { data: cvs } = await supabase
+      .from("resumes")
+      .select("*")
+      .eq("user_id", userId)
 
-    cvs.forEach((key) => pipeline.hgetall(key))
-
-    const results = await pipeline.exec()
-
-    return results as any[]
+    return cvs ?? []
   } catch (error) {
     return []
   }
 }
 
 export async function getCv(id: string, userId: string) {
-  const cv = await kv.hgetall(`user:${userId}:cv:${id}`)
+  const cookieStore = cookies()
 
-  if (!cv || (userId && cv.userId !== userId)) {
-    return null
-  }
+  const supabase = createServerComponentClient({
+    cookies: () => cookieStore,
+  })
 
-  return cv
+  const { data: resume } = await supabase
+    .from("resumes")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", userId)
+    .single()
+
+  return resume.cv
 }
 
 export async function getSharedCv(id: string) {
-  const keys = await kv.keys(`user:*:cv:${id}`)
+  const cookieStore = cookies()
 
-  if (!keys) {
-    return null
-  }
+  const supabase = createServerComponentClient({
+    cookies: () => cookieStore,
+  })
 
-  try {
-    const pipeline = kv.pipeline()
+  const { data: resume } = await supabase
+    .from("resumes")
+    .select("*")
+    .eq("id", id)
+    .single()
 
-    keys.forEach((key) => pipeline.hgetall(key))
-
-    const results = await pipeline.exec()
-
-    return results?.[0] ?? null
-  } catch (error) {
-    return null
-  }
+  return resume.cv
 }

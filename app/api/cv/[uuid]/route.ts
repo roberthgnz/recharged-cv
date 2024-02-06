@@ -2,7 +2,6 @@ import { cookies } from "next/headers"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
-import kv from "@vercel/kv"
 
 export async function PATCH(
   req: NextRequest,
@@ -31,11 +30,14 @@ export async function PATCH(
 
   try {
     const userId = session.user.id
-    const createdAt = Date.now()
 
-    const payload = { userId, uuid, cv, createdAt }
+    const payload = { cv, id: uuid, user_id: userId }
 
-    await kv.hset(`user:${userId}:cv:${uuid}`, payload)
+    const { error } = await supabase.from("resumes").upsert(payload)
+
+    if (error) {
+      throw new Error(error.message)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {

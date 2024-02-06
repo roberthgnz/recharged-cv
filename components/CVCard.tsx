@@ -7,11 +7,11 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 
 import { Button } from "./ui/button"
 
-export const CVCard = ({ uuid, cv }: any) => {
+export const CVCard = ({ id }: any) => {
   return (
     <Card className="flex h-full flex-col justify-between">
       <CardHeader>
-        CV <small>{uuid}</small>
+        CV <small>{id}</small>
       </CardHeader>
       <CardContent>Lorem ipsum dolor sit amet consectetur</CardContent>
       <CardFooter>
@@ -21,7 +21,7 @@ export const CVCard = ({ uuid, cv }: any) => {
             Remove
           </Button>
           <Button variant={"link"} asChild>
-            <Link href={`/resumes/${uuid}`}>
+            <Link href={`/resumes/${id}`}>
               <FiEdit2 className="mr-2 h-4 w-4" />
               Edit
             </Link>
