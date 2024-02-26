@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { FiEdit2, FiTrash } from "react-icons/fi"
 
