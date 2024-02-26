@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
+import { RefreshCcwIcon } from "lucide-react"
 import { toast } from "react-hot-toast"
 import { useOnClickOutside } from "usehooks-ts"
 
@@ -86,6 +87,7 @@ export const DialogSuggestions = ({
             disabled={loading}
           />
           <Button disabled={loading} onClick={generate}>
+            {loading && <RefreshCcwIcon className="mr-2 size-4 animate-spin" />}
             Generate
           </Button>
         </div>
@@ -102,7 +104,7 @@ export const DialogSuggestions = ({
                     className="flex flex-row gap-4"
                     key={`generated-${index}`}
                   >
-                    <div className="inline-flex h-5 w-5 shrink-0 cursor-default items-center justify-center rounded-full bg-blue-100 text-sm text-blue-700">
+                    <div className="inline-flex size-5 shrink-0 cursor-default items-center justify-center rounded-full bg-blue-100 text-sm text-blue-700">
                       {index + 1}
                     </div>
                     <div

@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import languages from "@/data/language.json"
-import { formatDate } from "@/utils/date"
 
+import { formatDate } from "@/utils/date"
 import { Card, CardContent } from "@/components/ui/card"
 import { Title } from "@/components/ui/title"
 
@@ -27,34 +27,34 @@ export const SharedCVPreview = ({ cv }: any) => {
   }
 
   return (
-    <Card className="w-[210mm] h-[297mm] mx-auto mb-8">
-      <CardContent className="w-full h-full p-6">
-        <Title className="font-bold text-lg">
-          {cv.personaldata.name} {cv.personaldata.surname1}{" "}
-          {cv.personaldata.surname2}
+    <Card className="mx-auto mb-8 h-[297mm] w-[210mm]">
+      <CardContent className="size-full p-6">
+        <Title className="text-lg font-bold">
+          {cv.personaldata?.name} {cv.personaldata?.surname1}{" "}
+          {cv.personaldata?.surname2}
         </Title>
-        <span className="text-xs">{cv.futurejob.preferredPosition}</span>
-        <div className="grid grid-cols-3 mt-6 gap-6">
+        <span className="text-xs">{cv.futurejob?.preferredPosition}</span>
+        <div className="mt-6 grid grid-cols-3 gap-6">
           <div className="col-span-2">
             <div className="space-y-6">
-              {cv.personaldata.summary && (
+              {cv.personaldata?.summary && (
                 <div>
                   <span className="mb-1 font-bold text-gray-700">Profile</span>
                   <p
                     className="text-xs"
                     dangerouslySetInnerHTML={{
-                      __html: cv.personaldata.summary,
+                      __html: cv.personaldata?.summary,
                     }}
                   ></p>
                 </div>
               )}
-              {cv.experience.experience.length ? (
+              {cv.experience?.experience.length ? (
                 <div>
                   <span className="mb-1 font-bold text-gray-700">
                     Employment History
                   </span>
                   <div className="space-y-3">
-                    {cv.experience.experience.map((experience: any) => (
+                    {cv.experience?.experience.map((experience: any) => (
                       <div key={experience.id}>
                         <p className="text-xs">
                           {experience.job} at {experience.company}
@@ -71,7 +71,7 @@ export const SharedCVPreview = ({ cv }: any) => {
                             : formatDate(experience.finishingDate)}
                         </span>
                         <p
-                          className="[&>p]:before:content-['\2022'] [&>p]:before:mr-1 text-xs space-y-1 mt-1"
+                          className="mt-1 space-y-1 text-xs [&>p]:before:mr-1 [&>p]:before:content-['\2022']"
                           dangerouslySetInnerHTML={{
                             __html: experience.description,
                           }}
@@ -81,13 +81,13 @@ export const SharedCVPreview = ({ cv }: any) => {
                   </div>
                 </div>
               ) : null}
-              {cv.education.education.length ? (
+              {cv.education?.education.length ? (
                 <div>
                   <span className="mb-1 font-bold text-gray-700">
                     Education
                   </span>
                   <div className="space-y-3">
-                    {cv.education.education.map((study: any) => (
+                    {cv.education?.education.map((study: any) => (
                       <div key={study.id}>
                         <p className="text-xs">{study.courseName}</p>
                         {study.institutionName && (
@@ -108,27 +108,27 @@ export const SharedCVPreview = ({ cv }: any) => {
               ) : null}
             </div>
           </div>
-          {Object.keys(cv.personaldata).length ? (
+          {cv?.personaldata && Object.keys(cv.personaldata).length ? (
             <div>
               <span className="mb-1 font-bold text-gray-700">Details</span>
               <ul className="text-xs">
                 <li>
-                  {cv.personaldata.cityName}, {cv.personaldata.zipCode}
+                  {cv.personaldata?.cityName}, {cv.personaldata?.zipCode}
                 </li>
                 <li>
-                  <Link href={`tel:${cv.personaldata.mobilePhone}`}>
-                    {cv.personaldata.mobilePhone}
+                  <Link href={`tel:${cv.personaldata?.mobilePhone}`}>
+                    {cv.personaldata?.mobilePhone}
                   </Link>
                 </li>
                 <li className="text-blue-500">
-                  <Link href={`mailto:${cv.personaldata.email}`}>
-                    {cv.personaldata.email}
+                  <Link href={`mailto:${cv.personaldata?.email}`}>
+                    {cv.personaldata?.email}
                   </Link>
                 </li>
               </ul>
               <span className="mt-3">Date of Birth</span>
-              <p className="font-normal text-xs">
-                {formatDate(cv.personaldata.birthDay)}
+              <p className="text-xs font-normal">
+                {formatDate(cv.personaldata?.birthDay)}
               </p>
               {cv.skills.expertise.length ? (
                 <div className="mt-3">

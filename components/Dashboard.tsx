@@ -9,18 +9,18 @@ export const Dashboard = ({ cvs }: { cvs: any[] }) => {
 
   return (
     <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {cvs.map((cv) => (
-        <CVCard key={cv.uuid} {...cv} />
-      ))}
-      <Card className="flex items-center justify-center border-2 border-dotted p-0 text-blue-500 shadow-none ring-0">
+      <Card className="flex items-center justify-center border-2 p-0 text-blue-500 shadow-none ring-0 transition-all hover:shadow-md">
         <Link
           href={`/resumes/${cvUuid}/`}
-          className="flex h-full w-full items-center justify-center p-6"
+          className="flex size-full items-center justify-center p-6"
         >
-          <PlusIcon className="mr-3 h-5 w-5" />
-          CREATE NEW RESUME
+          <PlusIcon className="mr-2 size-4" />
+          Add new CV
         </Link>
       </Card>
+      {cvs.map((cv) => (
+        <CVCard key={cv.id} {...cv} />
+      ))}
     </div>
   )
 }
