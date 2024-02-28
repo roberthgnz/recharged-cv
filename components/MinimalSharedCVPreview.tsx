@@ -27,7 +27,7 @@ export const MinimalSharedCVPreview = ({ cv }: any) => {
   }
 
   return (
-    <Card className="size-full border-0 shadow-none">
+    <Card className="size-full overflow-hidden border-0 shadow-none">
       <CardContent className="size-full p-6">
         <Title className="text-lg font-bold">
           {cv.personaldata?.name} {cv.personaldata?.surname1}{" "}

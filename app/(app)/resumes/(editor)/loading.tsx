@@ -3,7 +3,7 @@ import { Title } from "@/components/ui/title"
 
 export default function Loading() {
   return (
-    <div className="mt-6 h-full w-full">
+    <div className="mt-6 size-full">
       <div className="grid h-full grid-cols-2">
         <div className="h-full bg-white p-4">
           <Title className="font-extrabold">Personal Details</Title>
