@@ -11,9 +11,24 @@ export const Autosaving = ({ cv }: any) => {
 
   useEffect(() => {
     const isEmpty = (obj: any) => {
-      for (const key in obj) {
-        if (typeof obj[key] === "object" && !isEmpty(obj[key])) return false
+      if (obj === null || typeof obj !== "object") {
+        return true
       }
+
+      for (let key in obj) {
+        if (typeof obj[key] === "object") {
+          if (!isEmpty(obj[key])) {
+            return false
+          }
+        } else if (obj[key] instanceof Array) {
+          if (obj[key].length > 0) {
+            return false
+          }
+        } else {
+          return false
+        }
+      }
+
       return true
     }
 
