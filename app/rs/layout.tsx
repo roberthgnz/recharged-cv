@@ -17,7 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} ${
+          process.env.NODE_ENV === "production"
+            ? "hide-nextjs-portal"
+            : undefined
+        }`}
+      >
         {children}
         <Analytics />
       </body>
