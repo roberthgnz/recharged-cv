@@ -1,7 +1,6 @@
-"use client"
-
 import Link from "next/link"
 import languages from "@/data/language.json"
+import * as DOMPurify from "dompurify"
 
 import { formatDate } from "@/utils/date"
 import { Card, CardContent } from "@/components/ui/card"
@@ -26,6 +25,10 @@ export const MinimalSharedCVPreview = ({ cv }: any) => {
     }[level]
   }
 
+  const sanitizedData = () => ({
+    __html: DOMPurify.sanitize(cv.personaldata.summary),
+  })
+
   return (
     <Card className="size-full overflow-hidden border-0 shadow-none">
       <CardContent className="size-full p-6">
@@ -42,9 +45,7 @@ export const MinimalSharedCVPreview = ({ cv }: any) => {
                   <span className="mb-1 font-bold text-gray-700">Profile</span>
                   <p
                     className="text-xs"
-                    dangerouslySetInnerHTML={{
-                      __html: cv.personaldata?.summary,
-                    }}
+                    dangerouslySetInnerHTML={sanitizedData()}
                   ></p>
                 </div>
               )}
