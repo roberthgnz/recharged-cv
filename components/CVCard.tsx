@@ -1,9 +1,10 @@
 import Link from "next/link"
 import { FiEdit2, FiTrash } from "react-icons/fi"
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { removeCv } from "@/app/(app)/actions"
 
+import { CVCardPreview } from "./CVCardPreview"
 import { Button } from "./ui/button"
 
 export const CVCard = ({ id }: any) => {
@@ -11,10 +12,9 @@ export const CVCard = ({ id }: any) => {
 
   return (
     <Card className="flex h-full flex-col justify-between">
-      <CardHeader>
-        CV <small>{id}</small>
-      </CardHeader>
-      <CardContent></CardContent>
+      <CardContent className="pt-6">
+        <CVCardPreview id={id} />
+      </CardContent>
       <CardFooter>
         <div className="flex w-full justify-between">
           <form action={removeCvWithId}>
