@@ -10,6 +10,18 @@ export const Autosaving = ({ cv }: any) => {
   const [isSaving, setIsSaving] = useState(true)
 
   useEffect(() => {
+    const isEmpty = (obj: any) => {
+      for (const key in obj) {
+        if (typeof obj[key] === "object" && !isEmpty(obj[key])) return false
+      }
+      return true
+    }
+
+    if (isEmpty(cv)) {
+      setIsSaving(false)
+      return
+    }
+
     const save = async () => {
       try {
         setIsSaving(true)
