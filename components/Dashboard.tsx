@@ -9,7 +9,7 @@ export const Dashboard = ({ cvs }: { cvs: any[] }) => {
 
   return (
     <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <Card className="flex aspect-[9/16] items-center justify-center border-2 p-0 text-blue-500 shadow-none ring-0 transition-all hover:shadow-md">
+      <Card className="flex aspect-[9/16] h-full items-center justify-center border-2 p-0 text-blue-500 shadow-none ring-0 transition-all hover:shadow-md">
         <Link
           href={`/resumes/${cvUuid}/`}
           className="flex size-full items-center justify-center p-6"
