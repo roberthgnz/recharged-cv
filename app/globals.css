@@ -49,6 +49,6 @@
   }
 }
 
-.hide-nextjs-portal {
+.hide-nextjs-portal .nextjs-toast-errors-parent {
   display: none;
 }
