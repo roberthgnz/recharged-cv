@@ -1,6 +1,6 @@
 import Link from "next/link"
 import languages from "@/data/language.json"
-import * as DOMPurify from "dompurify"
+import * as DOMPurify from "isomorphic-dompurify"
 
 import { formatDate } from "@/utils/date"
 import { Card, CardContent } from "@/components/ui/card"
